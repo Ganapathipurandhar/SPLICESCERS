@@ -22,6 +22,8 @@ namespace SPLICESCERS.Work
 		private DurationYMDs nonISSick;
 		private double finalComp;
 		private string relationShip;
+		private double eEContrBasic;
+		private double eEContrCol;
 
 		/// <summary>
 		/// Input Values - Get from App.Config until production
@@ -49,6 +51,10 @@ namespace SPLICESCERS.Work
 		//Duration of Non Integrated Service(IS) and Sick Leave (Non Integrated
 		public DurationYMDs NonIntegratedService { get => nonIntegratedService; set => nonIntegratedService = value; }
 		public DurationYMDs NonISSick { get => nonISSick; set => nonISSick = value; }
+
+		//Employee Contriubtion (EE Contr)
+		public double EEContrBasic { get => eEContrBasic; set => eEContrBasic = value; }
+		public double EEContrCol { get => eEContrCol; set => eEContrCol = value; }
 
 		//Final Compensation
 		public double FinalComp { get => finalComp; set => finalComp = value; }
