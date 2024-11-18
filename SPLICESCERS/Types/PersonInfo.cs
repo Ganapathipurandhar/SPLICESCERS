@@ -14,10 +14,14 @@ namespace SPLICESCERS.Types
 	/// </summary>
 	public class PersonInfo
 	{
+		private string name;
+		private DateTime dOB;
+		private double age;
+		private double age1by4;
 
-		public string Name { get; set; }
-		public DateTime DOB { get; set; }
-		public double Age { get; set; }
-		public double Age1by4 { get; set; }
+		public string Name { get => name; set => name = value; }
+		public DateTime DOB { get => dOB; set => dOB = value; }
+		public double Age { get => age; set => age = value; }
+		public double Age1by4 { get => age1by4; set => age1by4 = value; }
 	}
 }
