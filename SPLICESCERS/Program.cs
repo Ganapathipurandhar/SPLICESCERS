@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SPLICESCERS.Work;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,13 @@ namespace SPLICESCERS
 		{
 			var _test = new test();
 			_test.printName("Hemant");
-			Console.ReadKey();
-		}
+			
+
+			WorkService workService = new WorkService();
+			workService.LoadData();
+
+            Console.ReadKey();
+        }
 
 
 	}
