@@ -85,14 +85,10 @@ namespace SPLICESCERS.Work
                 _workData.NonISSick.Years = Convert.ToInt32(applicationSettings["SLNIM"]);
                 _workData.NonISSick.Years = Convert.ToInt32(applicationSettings["SLNID"]);
 
-                _workData.FinalComp = Convert.ToDouble(applicationSettings["FinalComp"]);
-
-                
+                _workData.FinalComp = Convert.ToDouble(applicationSettings["FinalComp"]);                
 
             }
-
-            
-
+              
 		}
 
         public void ComputeWorkSheet() 
@@ -100,8 +96,16 @@ namespace SPLICESCERS.Work
             //Age computatione of Member and Beneficiary
             CalculateAgeAtRetirement(_workData.DateOfRetirement, _workData.MemberInfo);
 			CalculateAgeAtRetirement(_workData.DateOfRetirement, _workData.BeneficiaryInfo);
-            PrintProperty(_workData);
 
+            _workData.ISDuration = CalculateServiceDuration(_workData.IntegratedService);
+			_workData.ISSickDuration = CalculateServiceDuration(_workData.ISSick);
+            _workData.TotalIS = _workData.ISDuration + _workData.ISSickDuration;
+
+			_workData.NonISDuration = CalculateServiceDuration(_workData.NonIntegratedService); 
+            _workData.NonISSickDuration = CalculateServiceDuration(_workData.NonISSick);
+            _workData.TotalNonIS = _workData.NonISDuration + _workData.NonISSickDuration;
+			//
+			PrintProperty(_workData);
 		}
 
         public void CalculateAgeAtRetirement(DateTime retirementDate, PersonInfo member) 
@@ -110,6 +114,13 @@ namespace SPLICESCERS.Work
 			member.Age = Math.Round((totalDays / 365.25), 2);
 			member.Age1by4 = Math.Floor(member.Age / 0.25 + 0) * 0.25;
 		}
+
+        public double CalculateServiceDuration(DurationYMDs duration) 
+        {
+            double _yearInDecimal = duration.Years + (duration.Months/12) + (duration.Days/261);
+
+            return _yearInDecimal;
+        }
 
         public void PrintProperty(object t) 
         {
