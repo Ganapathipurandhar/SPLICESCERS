@@ -25,10 +25,8 @@ namespace SPLICESCERS.Work
 		private double eEContrBasic;
 		private double eEContrCol;
 
-		/// <summary>
-		/// Input Values - Get from App.Config until production
-		/// 
-		/// </summary>
+		#region InputValueFromConfig
+		
 		public RetirementType TypeOfRetirement { get => typeOfRetirement; set => typeOfRetirement = value; }
 		public DateTime DateOfRetirement { get => dateOfRetirement; set => dateOfRetirement = value; }
 		public MembershipType Membership { get => membership; set => membership = value; }
@@ -41,6 +39,7 @@ namespace SPLICESCERS.Work
 		public PersonInfo BeneficiaryInfo { get => beneficiaryInfo; set => beneficiaryInfo = value; }
 
 		//TODO
+		//Options are Spouse and Partner (Registered Domestic Partner)
 		//RelationShip we will use string for now, but will change it to Enum later when we know all options
 		public string RelationShip { get => relationShip; set => relationShip = value; }
 
@@ -57,7 +56,23 @@ namespace SPLICESCERS.Work
 		public double EEContrCol { get => eEContrCol; set => eEContrCol = value; }
 
 		//Final Compensation
-		public double FinalComp { get => finalComp; set => finalComp = value; }
+		public double FinalComp { get => finalComp; set => finalComp = value; } 
+		#endregion
+
+		//Computed Values for Work -Sheet
+		public double ISDuration { get; set; }
+		public double ISSickDuration { get; set; }
+		public double TotalIS {  get; set; }
+
+
+		public double NonISDuration { get; set; }
+		public double NonISSickDuration { get; set; }
+		public double TotalNonIS { get; set; }
+
+		public double TotalService { get; set; }
+
+
+
 
 	}
 }   
