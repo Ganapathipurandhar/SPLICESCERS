@@ -15,11 +15,11 @@ namespace SPLICESCERS.Types
 	public class DurationYMDs
 	{
 		private int years = 0;
-		private int months = 0;
+		private double months = 0;
 		private double days = 0;
 
 		public int Years { get => years; set => years = value; }
-		public int Months { get => months; set => months = value; }
+		public double Months { get => months; set => months = value; }
 		public double Days { get => days; set => days = value; }
 	}
 }
