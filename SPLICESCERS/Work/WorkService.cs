@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,10 +36,11 @@ namespace SPLICESCERS.Work
                     Console.WriteLine(key + " = " + applicationSettings[key]);
                 }
 
-                Enum.TryParse(applicationSettings["RetirementType"], out RetirementType rt);
-                _workData.TypeOfRetirement = rt;
+                //Enum.TryParse(applicationSettings["RetirementType"], out RetirementType rt);
+                //_workData.TypeOfRetirement = rt;
+				_workData.TypeOfRetirement = (RetirementType)Enum.Parse(typeof(RetirementType), applicationSettings["RetirementType"]);
 
-                _workData.DateOfRetirement = Convert.ToDateTime(applicationSettings["DateOfRetirement"], CultureInfo.CurrentCulture);
+				_workData.DateOfRetirement = Convert.ToDateTime(applicationSettings["DateOfRetirement"], CultureInfo.CurrentCulture);
 
                 Enum.TryParse(applicationSettings["Membership"], out MembershipType mt);
                 _workData.Membership = mt;
@@ -52,40 +55,77 @@ namespace SPLICESCERS.Work
                 Enum.TryParse(applicationSettings["MoneyPurchase"], out YesNo yesNo);
                 _workData.MoneyPurchase = yesNo;
 
-                _workData.MemberInfo = new PersonInfo();
+                //_workData.MemberInfo = new PersonInfo();
                 _workData.MemberInfo.Name = applicationSettings["MemberName"];
                 _workData.MemberInfo.DOB = DateTime.Parse(applicationSettings["MemberDOB"]);
 
-                _workData.BeneficiaryInfo = new PersonInfo();
+                //_workData.BeneficiaryInfo = new PersonInfo();
                 _workData.BeneficiaryInfo.Name = applicationSettings["BeneficiaryName"];
                 _workData.BeneficiaryInfo.DOB = DateTime.Parse(applicationSettings["BeneficiaryDOB"]);
 
                 _workData.RelationShip = applicationSettings["Relationship"];
 
-                _workData.IntegratedService = new DurationYMDs();
+                //_workData.IntegratedService = new DurationYMDs();
                 _workData.IntegratedService.Years = Convert.ToInt32(applicationSettings["ISY"]);
                 _workData.IntegratedService.Months = Convert.ToInt32(applicationSettings["ISM"]);
                 _workData.IntegratedService.Days = Convert.ToDouble(applicationSettings["ISD"]);
 
-                _workData.ISSick = new DurationYMDs();
+                //_workData.ISSick = new DurationYMDs();
                 _workData.ISSick.Years = Convert.ToInt32(applicationSettings["SLIY"]);
                 _workData.ISSick.Months = Convert.ToInt32(applicationSettings["SLIM"]);
                 _workData.ISSick.Days = Convert.ToDouble(applicationSettings["SLID"]);
 
-                _workData.NonIntegratedService = new DurationYMDs();
+                //_workData.NonIntegratedService = new DurationYMDs();
                 _workData.NonIntegratedService.Years = Convert.ToInt32(applicationSettings["NISY"]);
                 _workData.NonIntegratedService.Months = Convert.ToInt32(applicationSettings["NISM"]);
                 _workData.NonIntegratedService.Days = Convert.ToInt32(applicationSettings["NISD"]);
 
-                _workData.NonISSick = new DurationYMDs();
+                //_workData.NonISSick = new DurationYMDs();
                 _workData.NonISSick.Years = Convert.ToInt32(applicationSettings["SLNIY"]);
                 _workData.NonISSick.Years = Convert.ToInt32(applicationSettings["SLNIM"]);
                 _workData.NonISSick.Years = Convert.ToInt32(applicationSettings["SLNID"]);
 
                 _workData.FinalComp = Convert.ToDouble(applicationSettings["FinalComp"]);
 
+                
+
             }
 
+            
+
+		}
+
+        public void ComputeWorkSheet() 
+        {
+            //Age computatione of Member and Beneficiary
+            CalculateAgeAtRetirement(_workData.DateOfRetirement, _workData.MemberInfo);
+			CalculateAgeAtRetirement(_workData.DateOfRetirement, _workData.BeneficiaryInfo);
+            PrintProperty(_workData);
+
+		}
+
+        public void CalculateAgeAtRetirement(DateTime retirementDate, PersonInfo member) 
+        {
+			var totalDays = (retirementDate - member.DOB).TotalDays;
+			member.Age = Math.Round((totalDays / 365.25), 2);
+			member.Age1by4 = Math.Floor(member.Age / 0.25 + 0) * 0.25;
+		}
+
+        public void PrintProperty(object t) 
+        {
+			foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(t))
+			{
+				string name = descriptor.Name;
+				object value = descriptor.GetValue(t);
+                Type _type = value.GetType();
+                Console.WriteLine("{0}={1}", name, value);
+
+				if (_type.IsEnum || (_type.Namespace == "System")) 
+                { } 
+                else
+                { PrintProperty(value); }
+				
+			}
 		}
 	}
 }

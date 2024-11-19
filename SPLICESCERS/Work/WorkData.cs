@@ -14,19 +14,26 @@ namespace SPLICESCERS.Work
 		private MembershipType membership;
 		private Tiers tier;
 		private YesNo moneyPurchase;
-		private PersonInfo memberInfo;
-		private PersonInfo beneficiaryInfo;
-		private DurationYMDs integratedService;
-		private DurationYMDs iSSick;
-		private DurationYMDs nonIntegratedService;
-		private DurationYMDs nonISSick;
+		private PersonInfo memberInfo = new PersonInfo();
+		private PersonInfo beneficiaryInfo = new PersonInfo();
+		private DurationYMDs integratedService = new DurationYMDs();
+		private DurationYMDs iSSick = new DurationYMDs();
+		private DurationYMDs nonIntegratedService = new DurationYMDs();
+		private DurationYMDs nonISSick = new DurationYMDs();
 		private double finalComp;
 		private string relationShip;
 		private double eEContrBasic;
 		private double eEContrCol;
+		private double iSDuration;
+		private double iSSickDuration;
+		private double totalIS;
+		private double nonISDuration;
+		private double nonISSickDuration;
+		private double totalNonIS;
+		private double totalService;
 
 		#region InputValueFromConfig
-		
+
 		public RetirementType TypeOfRetirement { get => typeOfRetirement; set => typeOfRetirement = value; }
 		public DateTime DateOfRetirement { get => dateOfRetirement; set => dateOfRetirement = value; }
 		public MembershipType Membership { get => membership; set => membership = value; }
@@ -56,23 +63,19 @@ namespace SPLICESCERS.Work
 		public double EEContrCol { get => eEContrCol; set => eEContrCol = value; }
 
 		//Final Compensation
-		public double FinalComp { get => finalComp; set => finalComp = value; } 
+		public double FinalComp { get => finalComp; set => finalComp = value; }
 		#endregion
 
 		//Computed Values for Work -Sheet
-		public double ISDuration { get; set; }
-		public double ISSickDuration { get; set; }
-		public double TotalIS {  get; set; }
+		public double ISDuration { get => iSDuration; set => iSDuration = value; }
+		public double ISSickDuration { get => iSSickDuration; set => iSSickDuration = value; }
+		public double TotalIS { get => totalIS; set => totalIS = value; }
 
+		public double NonISDuration { get => nonISDuration; set => nonISDuration = value; }
+		public double NonISSickDuration { get => nonISSickDuration; set => nonISSickDuration = value; }
+		public double TotalNonIS { get => totalNonIS; set => totalNonIS = value; }
 
-		public double NonISDuration { get; set; }
-		public double NonISSickDuration { get; set; }
-		public double TotalNonIS { get; set; }
-
-		public double TotalService { get; set; }
-
-
-
+		public double TotalService { get => totalService; set => totalService = value; }
 
 	}
 }   
