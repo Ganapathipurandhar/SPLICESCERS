@@ -36,54 +36,44 @@ namespace SPLICESCERS.Work
                     Console.WriteLine(key + " = " + applicationSettings[key]);
                 }
 
-                //Enum.TryParse(applicationSettings["RetirementType"], out RetirementType rt);
-                //_workData.TypeOfRetirement = rt;
+                
 				_workData.TypeOfRetirement = (RetirementType)Enum.Parse(typeof(RetirementType), applicationSettings["RetirementType"]);
 
-				_workData.DateOfRetirement = Convert.ToDateTime(applicationSettings["DateOfRetirement"], CultureInfo.CurrentCulture);
+				_workData.DateOfRetirement = DateTime.Parse(applicationSettings["DateOfRetirement"]);
 
-                Enum.TryParse(applicationSettings["Membership"], out MembershipType mt);
-                _workData.Membership = mt;
+                _workData.Membership = (MembershipType)Enum.Parse(typeof(MembershipType), applicationSettings["Membership"]);
 
-                Enum.TryParse(applicationSettings["TIER"], out Tiers ti);
-                _workData.Tier = ti;
+                _workData.Tier = (Tiers)Enum.Parse(typeof(Tiers), applicationSettings["TIER"]);
 
-                _workData.EEContrBasic = Convert.ToDouble(applicationSettings["EEContBasic"]);
-                _workData.EEContrCol = Convert.ToDouble(applicationSettings["EEContCol"]);
+                _workData.EEContrBasic = Convert.ToDouble(applicationSettings["EEContrBasic"]);
+                _workData.EEContrCol = Convert.ToDouble(applicationSettings["EEContrCol"]);
 
 
-                Enum.TryParse(applicationSettings["MoneyPurchase"], out YesNo yesNo);
-                _workData.MoneyPurchase = yesNo;
+                _workData.MoneyPurchase = (YesNo)Enum.Parse(typeof(YesNo), applicationSettings["MoneyPurchase"]);
 
-                //_workData.MemberInfo = new PersonInfo();
                 _workData.MemberInfo.Name = applicationSettings["MemberName"];
                 _workData.MemberInfo.DOB = DateTime.Parse(applicationSettings["MemberDOB"]);
 
-                //_workData.BeneficiaryInfo = new PersonInfo();
                 _workData.BeneficiaryInfo.Name = applicationSettings["BeneficiaryName"];
                 _workData.BeneficiaryInfo.DOB = DateTime.Parse(applicationSettings["BeneficiaryDOB"]);
 
                 _workData.RelationShip = applicationSettings["Relationship"];
 
-                //_workData.IntegratedService = new DurationYMDs();
                 _workData.IntegratedService.Years = Convert.ToInt32(applicationSettings["ISY"]);
-                _workData.IntegratedService.Months = Convert.ToInt32(applicationSettings["ISM"]);
+                _workData.IntegratedService.Months = Convert.ToDouble(applicationSettings["ISM"]);
                 _workData.IntegratedService.Days = Convert.ToDouble(applicationSettings["ISD"]);
 
-                //_workData.ISSick = new DurationYMDs();
                 _workData.ISSick.Years = Convert.ToInt32(applicationSettings["SLIY"]);
-                _workData.ISSick.Months = Convert.ToInt32(applicationSettings["SLIM"]);
+                _workData.ISSick.Months = Convert.ToDouble(applicationSettings["SLIM"]);
                 _workData.ISSick.Days = Convert.ToDouble(applicationSettings["SLID"]);
 
-                //_workData.NonIntegratedService = new DurationYMDs();
                 _workData.NonIntegratedService.Years = Convert.ToInt32(applicationSettings["NISY"]);
-                _workData.NonIntegratedService.Months = Convert.ToInt32(applicationSettings["NISM"]);
-                _workData.NonIntegratedService.Days = Convert.ToInt32(applicationSettings["NISD"]);
+                _workData.NonIntegratedService.Months = Convert.ToDouble(applicationSettings["NISM"]);
+                _workData.NonIntegratedService.Days = Convert.ToDouble(applicationSettings["NISD"]);
 
-                //_workData.NonISSick = new DurationYMDs();
                 _workData.NonISSick.Years = Convert.ToInt32(applicationSettings["SLNIY"]);
-                _workData.NonISSick.Years = Convert.ToInt32(applicationSettings["SLNIM"]);
-                _workData.NonISSick.Years = Convert.ToInt32(applicationSettings["SLNID"]);
+                _workData.NonISSick.Months = Convert.ToDouble(applicationSettings["SLNIM"]);
+                _workData.NonISSick.Days = Convert.ToDouble(applicationSettings["SLNID"]);
 
                 _workData.FinalComp = Convert.ToDouble(applicationSettings["FinalComp"]);                
 
