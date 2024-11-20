@@ -34,6 +34,10 @@ namespace SPLICESCERS.Work
 
 		private ERF erf31676_10_45 = new ERF();
         private ERF erf31676_10_46 = new ERF();
+        private ERF erf31676_10_47 = new ERF();
+        private ERF erf31676_10_48 = new ERF();
+        private ERF erf31676_10_49 = new ERF();
+        private ERF erf31676_10_50 = new ERF();
 
         #region InputValueFromConfig
 
@@ -83,6 +87,14 @@ namespace SPLICESCERS.Work
 		public ERF ERF31676_10_45 { get => erf31676_10_45; set=> erf31676_10_45 = value; }
 
         public ERF ERF31676_10_46 { get => erf31676_10_46; set => erf31676_10_46 = value; }
+
+        public ERF ERF31676_10_47 { get => erf31676_10_47; set => erf31676_10_47 = value; }
+
+        public ERF ERF31676_10_48 { get => erf31676_10_48; set => erf31676_10_48 = value; }
+
+        public ERF ERF31676_10_49 { get => erf31676_10_49; set => erf31676_10_49 = value; }
+
+        public ERF ERF31676_10_50 { get => erf31676_10_50; set => erf31676_10_50 = value; }
 
     }
 }   
