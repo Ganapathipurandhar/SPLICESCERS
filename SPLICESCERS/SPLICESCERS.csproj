@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ConvertedData\31676_10.json" />
     <None Include="Data\31676.10.xlsx" />
     <None Include="packages.config" />
   </ItemGroup>
