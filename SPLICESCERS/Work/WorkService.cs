@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
+using System.Runtime;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,8 @@ namespace SPLICESCERS.Work
         }
 		public WorkService(string name) { }
 
-		public void LoadData()
-		{
-
+        public void LoadData()
+        {
             var applicationSettings = ConfigurationManager.GetSection("appSettings") as NameValueCollection;
             if (applicationSettings.Count == 0)
             {
@@ -32,14 +32,14 @@ namespace SPLICESCERS.Work
             {
                 foreach (var key in applicationSettings.AllKeys)
                 {
-                    
+
                     Console.WriteLine(key + " = " + applicationSettings[key]);
                 }
 
-                
-				_workData.TypeOfRetirement = (RetirementType)Enum.Parse(typeof(RetirementType), applicationSettings["RetirementType"]);
 
-				_workData.DateOfRetirement = DateTime.Parse(applicationSettings["DateOfRetirement"]);
+                _workData.TypeOfRetirement = (RetirementType)Enum.Parse(typeof(RetirementType), applicationSettings["RetirementType"]);
+
+                _workData.DateOfRetirement = DateTime.Parse(applicationSettings["DateOfRetirement"]);
 
                 _workData.Membership = (MembershipType)Enum.Parse(typeof(MembershipType), applicationSettings["Membership"]);
 
@@ -75,11 +75,34 @@ namespace SPLICESCERS.Work
                 _workData.NonISSick.Months = Convert.ToDouble(applicationSettings["SLNIM"]);
                 _workData.NonISSick.Days = Convert.ToDouble(applicationSettings["SLNID"]);
 
-                _workData.FinalComp = Convert.ToDouble(applicationSettings["FinalComp"]);                
-
+                _workData.FinalComp = Convert.ToDouble(applicationSettings["FinalComp"]);
             }
-              
-		}
+
+            var ERF31676_10_Settings = ConfigurationManager.GetSection("ERF31676.10") as NameValueCollection;
+            if (ERF31676_10_Settings.Count == 0)
+            {
+                Console.WriteLine("ERF31676_10 Settings are not defined");
+            }
+            else
+            {
+                foreach (var key in ERF31676_10_Settings.AllKeys)
+                {
+
+                    Console.WriteLine(key + " = " + ERF31676_10_Settings[key]);
+                }
+
+                _workData.ERF31676_10_45.Value1 = double.Parse(ERF31676_10_Settings["45.00"]);
+                _workData.ERF31676_10_45.Value2 = double.Parse(ERF31676_10_Settings["45.25"]);
+                _workData.ERF31676_10_45.Value3 = double.Parse(ERF31676_10_Settings["45.50"]);
+                _workData.ERF31676_10_45.Value4 = double.Parse(ERF31676_10_Settings["45.75"]);
+
+                _workData.ERF31676_10_46.Value1 = double.Parse(ERF31676_10_Settings["46.00"]);
+                _workData.ERF31676_10_46.Value2 = double.Parse(ERF31676_10_Settings["46.25"]);
+                _workData.ERF31676_10_46.Value3 = double.Parse(ERF31676_10_Settings["46.50"]);
+                _workData.ERF31676_10_46.Value4 = double.Parse(ERF31676_10_Settings["46.75"]);
+            }
+
+        }
 
         public void ComputeWorkSheet() 
         {

@@ -32,9 +32,12 @@ namespace SPLICESCERS.Work
 		private double totalNonIS;
 		private double totalService;
 
-		#region InputValueFromConfig
+		private ERF erf31676_10_45 = new ERF();
+        private ERF erf31676_10_46 = new ERF();
 
-		public RetirementType TypeOfRetirement { get => typeOfRetirement; set => typeOfRetirement = value; }
+        #region InputValueFromConfig
+
+        public RetirementType TypeOfRetirement { get => typeOfRetirement; set => typeOfRetirement = value; }
 		public DateTime DateOfRetirement { get => dateOfRetirement; set => dateOfRetirement = value; }
 		public MembershipType Membership { get => membership; set => membership = value; }
 		public Tiers Tier { get => tier; set => tier = value; }
@@ -77,5 +80,9 @@ namespace SPLICESCERS.Work
 
 		public double TotalService { get => totalService; set => totalService = value; }
 
-	}
+		public ERF ERF31676_10_45 { get => erf31676_10_45; set=> erf31676_10_45 = value; }
+
+        public ERF ERF31676_10_46 { get => erf31676_10_46; set => erf31676_10_46 = value; }
+
+    }
 }   
