@@ -25,9 +25,6 @@ namespace SPLICESCERS
 			_test.print("*****************************************************************");
 			workService.ComputeWorkSheet();
 
-            ExcelToJson.ConvertExcelToJson(@"C:\Users\ashok\Downloads\31676.10.xlsx", "Sheet1", @"C:\Users\ashok\OneDrive\Desktop\temp.json");
-
-
             Console.ReadKey();
 		}
 	}
