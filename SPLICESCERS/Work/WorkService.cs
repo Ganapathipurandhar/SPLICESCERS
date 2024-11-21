@@ -81,8 +81,29 @@ namespace SPLICESCERS.Work
             }
 
             //Reading 31676_10.json values and writing to console 
-            var items = JsonFileReader.Read<ERF>(@".\Data\31676_10.json");
-            foreach(var item in items )
+            _workData.ERF31676_10 = JsonFileReader.Read<ERF>(@".\Data\31676_10.json");
+            foreach(var item in _workData.ERF31676_10)
+            {
+                Console.WriteLine(item.AgeAtRetirement + " = " + item.Fraction);
+            }
+
+            //Reading 31676_10.json values and writing to console 
+            _workData.ERF31664 = JsonFileReader.Read<ERF>(@".\Data\31664.json");
+            foreach (var item in _workData.ERF31676_10)
+            {
+                Console.WriteLine(item.AgeAtRetirement + " = " + item.Fraction);
+            }
+
+            //Reading 31676_10.json values and writing to console 
+            _workData.ERF31752A = JsonFileReader.Read<ERF>(@".\Data\31752A.json");
+            foreach (var item in _workData.ERF31676_10)
+            {
+                Console.WriteLine(item.AgeAtRetirement + " = " + item.Fraction);
+            }
+
+            //Reading 31676_10.json values and writing to console 
+            _workData.ERF31752B = JsonFileReader.Read<ERF>(@".\Data\31752B.json");
+            foreach (var item in _workData.ERF31676_10)
             {
                 Console.WriteLine(item.AgeAtRetirement + " = " + item.Fraction);
             }
