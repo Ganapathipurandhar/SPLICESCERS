@@ -72,11 +72,11 @@ namespace SPLICESCERS.Services
             }
 
             //Reading 31676_10.json values and writing to console 
-            var items = JsonFileReader.Read<ERF>(@".\Data\31676_10.json");
-            foreach(var item in items )
-            {
-                Console.WriteLine(item.AgeAtRetirement + " = " + item.Fraction);
-            }
+            //var items = JsonFileReader.Read<ERF>(@".\Data\31676_10.json");
+            //foreach(var item in items )
+            //{
+            //    Console.WriteLine(item.AgeAtRetirement + " = " + item.Fraction);
+            //}
 
         }
 

@@ -79,6 +79,7 @@
     <Compile Include="JsonFileReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ERFService.cs" />
     <Compile Include="test.cs" />
     <Compile Include="Types\DurationYMDs.cs" />
     <Compile Include="Types\ERF.cs" />
@@ -89,12 +90,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Data\31664.json" />
+    <None Include="Data\31664.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Data\31676_10.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Data\31752A.json" />
-    <None Include="Data\31752B.json" />
+    <None Include="Data\31752A.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\31752B.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

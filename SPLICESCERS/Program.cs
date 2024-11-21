@@ -20,6 +20,9 @@ namespace SPLICESCERS
 			_test.print("*****************************************************************");
 			workService.ComputeWorkSheet();
 
+			ERFService eRFService = new ERFService();
+
+
 			Console.ReadKey();
 		}
 	}
