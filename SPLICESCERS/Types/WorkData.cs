@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SPLICESCERS.Work
+namespace SPLICESCERS.Types
 {
 	public  class WorkData
 	{
