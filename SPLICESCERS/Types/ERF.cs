@@ -4,11 +4,11 @@ namespace SPLICESCERS.Types
 {
 	public class ERF
     {
-        private string ageAtRetirement;
-        private string fraction;
+        private double ageAtRetirement;
+        private double fraction;
 
         [JsonPropertyName("Age at retirement")]
-        public string AgeAtRetirement { get => ageAtRetirement; set => ageAtRetirement = value; }
-        public string Fraction { get => fraction; set => fraction = value; }
+        public double AgeAtRetirement { get => ageAtRetirement; set => ageAtRetirement = value; }
+        public double Fraction { get => fraction; set => fraction = value; }
     }
 }
