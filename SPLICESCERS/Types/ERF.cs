@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace SPLICESCERS.Types
 {
     public class ERF
     {
-        private double ageAtRetirement;
-        private double fraction;
+        private string ageAtRetirement;
+        private string fraction;
 
-        public double AgeAtRetirement { get => ageAtRetirement; set => ageAtRetirement = value; }
-        public double Fraction { get => fraction; set => fraction = value; }
+        [JsonPropertyName("Age at retirement")]
+        public string AgeAtRetirement { get => ageAtRetirement; set => ageAtRetirement = value; }
+        public string Fraction { get => fraction; set => fraction = value; }
     }
 }

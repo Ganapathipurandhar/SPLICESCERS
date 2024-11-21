@@ -5,10 +5,12 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Configuration;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace SPLICESCERS.Work
@@ -78,48 +80,11 @@ namespace SPLICESCERS.Work
                 _workData.FinalComp = Convert.ToDouble(applicationSettings["FinalComp"]);
             }
 
-            var ERF31676_10_Settings = ConfigurationManager.GetSection("ERF31676.10") as NameValueCollection;
-            if (ERF31676_10_Settings.Count == 0)
+            //Reading 31676_10.json values and writing to console 
+            var items = JsonFileReader.Read<ERF>(@".\Data\31676_10.json");
+            foreach(var item in items )
             {
-                Console.WriteLine("ERF31676_10 Settings are not defined");
-            }
-            else
-            {
-                foreach (var key in ERF31676_10_Settings.AllKeys)
-                {
-
-                    Console.WriteLine(key + " = " + ERF31676_10_Settings[key]);
-                }
-
-                //_workData.ERF31676_10_45.Value1 = double.Parse(ERF31676_10_Settings["45.00"]);
-                //_workData.ERF31676_10_45.Value2 = double.Parse(ERF31676_10_Settings["45.25"]);
-                //_workData.ERF31676_10_45.Value3 = double.Parse(ERF31676_10_Settings["45.50"]);
-                //_workData.ERF31676_10_45.Value4 = double.Parse(ERF31676_10_Settings["45.75"]);
-
-                //_workData.ERF31676_10_46.Value1 = double.Parse(ERF31676_10_Settings["46.00"]);
-                //_workData.ERF31676_10_46.Value2 = double.Parse(ERF31676_10_Settings["46.25"]);
-                //_workData.ERF31676_10_46.Value3 = double.Parse(ERF31676_10_Settings["46.50"]);
-                //_workData.ERF31676_10_46.Value4 = double.Parse(ERF31676_10_Settings["46.75"]);
-
-                //_workData.ERF31676_10_47.Value1 = double.Parse(ERF31676_10_Settings["47.00"]);
-                //_workData.ERF31676_10_47.Value2 = double.Parse(ERF31676_10_Settings["47.25"]);
-                //_workData.ERF31676_10_47.Value3 = double.Parse(ERF31676_10_Settings["47.50"]);
-                //_workData.ERF31676_10_47.Value4 = double.Parse(ERF31676_10_Settings["47.75"]);
-
-                //_workData.ERF31676_10_48.Value1 = double.Parse(ERF31676_10_Settings["48.00"]);
-                //_workData.ERF31676_10_48.Value2 = double.Parse(ERF31676_10_Settings["48.25"]);
-                //_workData.ERF31676_10_48.Value3 = double.Parse(ERF31676_10_Settings["48.50"]);
-                //_workData.ERF31676_10_48.Value4 = double.Parse(ERF31676_10_Settings["48.75"]);
-
-                //_workData.ERF31676_10_49.Value1 = double.Parse(ERF31676_10_Settings["49.00"]);
-                //_workData.ERF31676_10_49.Value2 = double.Parse(ERF31676_10_Settings["49.25"]);
-                //_workData.ERF31676_10_49.Value3 = double.Parse(ERF31676_10_Settings["49.50"]);
-                //_workData.ERF31676_10_49.Value4 = double.Parse(ERF31676_10_Settings["49.75"]);
-
-                //_workData.ERF31676_10_50.Value1 = double.Parse(ERF31676_10_Settings["50.00"]);
-                //_workData.ERF31676_10_50.Value2 = double.Parse(ERF31676_10_Settings["50.25"]);
-                //_workData.ERF31676_10_50.Value3 = double.Parse(ERF31676_10_Settings["50.50"]);
-                //_workData.ERF31676_10_50.Value4 = double.Parse(ERF31676_10_Settings["50.75"]);
+                Console.WriteLine(item.AgeAtRetirement + " = " + item.Fraction);
             }
 
         }
