@@ -9,10 +9,15 @@ namespace SPLICESCERS.Services
 {
 	public class ERFService
 	{
-		public List<ERF> ERF31676_10 { get; set; }
-		public List<ERF> ERF31664 { get; set; }
-		public List<ERF> ERF31752A { get; set; }
-		public List<ERF> ERF31752B { get; set; }
+		private List<ERF> erf31676_10;
+		private List<ERF> erf31664;
+		private List<ERF> erf31752A;
+		private List<ERF> erf31752B;
+
+		public List<ERF> ERF31676_10 { get => erf31676_10; set => erf31676_10 = value; }
+		public List<ERF> ERF31664 { get => erf31664; set => erf31664 = value; }
+		public List<ERF> ERF31752A { get => erf31752A; set => erf31752A = value; }
+		public List<ERF> ERF31752B { get => erf31752B; set => erf31752B = value; }
 
 
 		public ERFService() 
