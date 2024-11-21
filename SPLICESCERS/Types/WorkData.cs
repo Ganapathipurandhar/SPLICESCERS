@@ -32,10 +32,7 @@ namespace SPLICESCERS.Types
 		private double totalNonIS;
 		private double totalService;
 
-        private List<ERF> erf31676_10;
-        private List<ERF> erf31664;
-        private List<ERF> erf31752A;
-        private List<ERF> erf31752B;
+      
 
         #region InputValueFromConfig
 
@@ -82,10 +79,7 @@ namespace SPLICESCERS.Types
 
 		public double TotalService { get => totalService; set => totalService = value; }
 
-		public List<ERF> ERF31676_10 { get => erf31676_10; set=> erf31676_10 = value;}
-        public List<ERF> ERF31664 { get => erf31664; set => erf31664 = value; }
-        public List<ERF> ERF31752A { get => erf31752A; set => erf31752A = value; }
-        public List<ERF> ERF31752B { get => erf31752B; set => erf31752B = value; }
+	
 
     }
 }   
