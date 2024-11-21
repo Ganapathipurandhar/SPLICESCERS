@@ -84,8 +84,8 @@
     <Compile Include="Types\ERF.cs" />
     <Compile Include="Types\PersonInfo.cs" />
     <Compile Include="Types\ScersEnums.cs" />
-    <Compile Include="Work\WorkData.cs" />
-    <Compile Include="Work\WorkService.cs" />
+    <Compile Include="Types\WorkData.cs" />
+    <Compile Include="Services\WorkService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
