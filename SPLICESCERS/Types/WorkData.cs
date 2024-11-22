@@ -33,6 +33,12 @@ namespace SPLICESCERS.Types
 		private double totalService;
 		private string erfArticle;
 		private double erfFraction;
+		private double integrateBenefits;
+		private double nonIntegrateBenefits;
+		private double serviceRetirementBenefits;
+		private double moneyPurchaseCalc;
+		private string nscdArticle;
+		private double nscdFraction;
 
 
 
@@ -85,7 +91,18 @@ namespace SPLICESCERS.Types
 		public string ERFArticle { get => erfArticle; set => erfArticle = value; }
 		public double ERFFraction { get => erfFraction; set => erfFraction = value; }
 
-
+		//Service Retirement Benefits
+		public double IntegrateBenefits { get => integrateBenefits; set => integrateBenefits = value; }
+		public double NonIntegrateBenefits { get => nonIntegrateBenefits; set => nonIntegrateBenefits = value; }
+		public double ServiceRetirementBenefits { get => serviceRetirementBenefits; set => serviceRetirementBenefits = value; }
+		public double MoneyPurchaseCalc { get => moneyPurchaseCalc; set => moneyPurchaseCalc = value; }//TODO: This needs to be calculated after calcData Sheet Completion
+		public string NSCDArticle { get => nscdArticle; set => nscdArticle = value; }
+		public double NSCDFraction { get => nscdFraction; set => nscdFraction = value; }
+		public double Benefit90Perc { get; set; }
+		public double FAS1by3 {  get; set; }
+		public double ServiceProjected { get; set; }
+		public DateTime ServiceProjAge65 { get; set; }
+		public double SerRetDiff { get; set; }//ServiceProjAge65 and DateOfRetirement difference
 
 	}
 }   
