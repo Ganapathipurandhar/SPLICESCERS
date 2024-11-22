@@ -71,13 +71,6 @@ namespace SPLICESCERS.Services
                 _workData.FinalComp = Convert.ToDouble(applicationSettings["FinalComp"]);
             }
 
-            //Reading 31676_10.json values and writing to console 
-            //var items = JsonFileReader.Read<ERF>(@".\Data\31676_10.json");
-            //foreach(var item in items )
-            //{
-            //    Console.WriteLine(item.AgeAtRetirement + " = " + item.Fraction);
-            //}
-
         }
 
         public void ComputeWorkSheet() 
@@ -93,7 +86,8 @@ namespace SPLICESCERS.Services
 			_workData.NonISDuration = CalculateServiceDuration(_workData.NonIntegratedService); 
             _workData.NonISSickDuration = CalculateServiceDuration(_workData.NonISSick);
             _workData.TotalNonIS = _workData.NonISDuration + _workData.NonISSickDuration;
-			//
+
+            CalculateERF();
 			PrintProperty(_workData);
 		}
 
@@ -111,7 +105,24 @@ namespace SPLICESCERS.Services
             return _yearInDecimal;
         }
 
-        public void PrintProperty(object t) 
+        public void CalculateERF() 
+        {
+            if (_workData.Membership == MembershipType.General)
+            {
+                _workData.ERFArticle = "ERF 31676.1";
+				_workData.ERFFraction = ERFService.GetFraction(ERFService.ERF31676_10, _workData.MemberInfo.Age1by4);
+			}
+            else 
+            {
+                _workData.ERFArticle = "ERF 31664";
+				_workData.ERFFraction = ERFService.GetFraction(ERFService.ERF31664, _workData.MemberInfo.Age1by4);
+
+			}
+		}
+
+
+
+		public void PrintProperty(object t) 
         {
 			foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(t))
 			{

@@ -8,7 +8,7 @@ namespace SPLICESCERS
 		static void Main(string[] args)
 		{
 			var _test = new test();
-			ERFService eRFService = new ERFService();
+			ERFService.LoadERF();
 
 			//_test.printName("Load Memeber information from App.Config to WorkData ");
 			_test.print("*******************************************************");

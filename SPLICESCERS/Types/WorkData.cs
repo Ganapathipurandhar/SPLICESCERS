@@ -31,12 +31,14 @@ namespace SPLICESCERS.Types
 		private double nonISSickDuration;
 		private double totalNonIS;
 		private double totalService;
+		private string erfArticle;
+		private double erfFraction;
 
-      
 
-        #region InputValueFromConfig
 
-        public RetirementType TypeOfRetirement { get => typeOfRetirement; set => typeOfRetirement = value; }
+		#region InputValueFromConfig
+
+		public RetirementType TypeOfRetirement { get => typeOfRetirement; set => typeOfRetirement = value; }
 		public DateTime DateOfRetirement { get => dateOfRetirement; set => dateOfRetirement = value; }
 		public MembershipType Membership { get => membership; set => membership = value; }
 		public Tiers Tier { get => tier; set => tier = value; }
@@ -79,7 +81,11 @@ namespace SPLICESCERS.Types
 
 		public double TotalService { get => totalService; set => totalService = value; }
 
-	
+		//Article Number it will either 31676.1 or 31664"
+		public string ERFArticle { get => erfArticle; set => erfArticle = value; }
+		public double ERFFraction { get => erfFraction; set => erfFraction = value; }
 
-    }
+
+
+	}
 }   
