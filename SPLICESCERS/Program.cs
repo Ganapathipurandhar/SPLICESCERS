@@ -8,6 +8,8 @@ namespace SPLICESCERS
 		static void Main(string[] args)
 		{
 			var _test = new test();
+			ERFService eRFService = new ERFService();
+
 			//_test.printName("Load Memeber information from App.Config to WorkData ");
 			_test.print("*******************************************************");
 			_test.print("Load Memeber information from App.Config to WorkData ");
@@ -18,10 +20,7 @@ namespace SPLICESCERS
 			_test.print("****************************************************************");
 			_test.print("Compute worksheet based on input and according to cell equation");
 			_test.print("*****************************************************************");
-			workService.ComputeWorkSheet();
-
-			ERFService eRFService = new ERFService();
-
+			workService.ComputeWorkSheet();			
 
 			Console.ReadKey();
 		}
