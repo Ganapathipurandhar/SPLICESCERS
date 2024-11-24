@@ -127,9 +127,13 @@ namespace SPLICESCERS.Services
         {
             double _divider = _workData.Membership == MembershipType.Safety ? 50 : 60;
 
-            //116.67 is reduced retirement allowance
-
-            _workData.IntegrateBenefits = ((_workData.FinalComp - 116.67) / _divider) * (_workData.TotalIS * _workData.ERFFraction);
+            //= DATE((YEAR(B8) - 1900) + IF(LOWER(B3) = "general", 65, 55), MONTH(B8), DAY(B8))
+            _workData.ServiceProjAge65 = _workData.MemberInfo.DOB
+                    .AddYears((_workData.Membership == MembershipType.General)?65:55);
+			_workData.SerRetDiff =  Math.Round(((_workData.ServiceProjAge65 - _workData.DateOfRetirement).TotalDays)/365,4);
+			
+			//116.67 is reduced retirement allowance
+			_workData.IntegrateBenefits = ((_workData.FinalComp - 116.67) / _divider) * (_workData.TotalIS * _workData.ERFFraction);
             _workData.NonIntegrateBenefits = (_workData.FinalComp / _divider) * (_workData.TotalNonIS * _workData.ERFFraction);
             _workData.ServiceRetirementBenefits = _workData.IntegrateBenefits + _workData.NonIntegrateBenefits;
 
@@ -142,12 +146,10 @@ namespace SPLICESCERS.Services
 				_workData.NSCDFraction = (0.1+ 0.02 *(Math.Min(15, Math.Floor(_workData.TotalService)))) * _workData.FinalComp;
                 //_workData.Benefit90Perc = null;
 				//_workData.FAS1by3 = null;
-				//_workData.ServiceProjected = null;		
-
+				//_workData.ServiceProjected = null;	
 			}
             else 
             {
-
                 //TODO - 
                 
                 if (_workData.TypeOfRetirement == RetirementType.NSCD)
@@ -175,11 +177,6 @@ namespace SPLICESCERS.Services
 			}
 
 		}
-
-        public void CalculateNSCD() 
-        {
-
-        }
 
 		public void PrintProperty(object t) 
         {
