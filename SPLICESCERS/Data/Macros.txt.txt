@@ -1,0 +1,124 @@
+sub Macro1{
+	Select Factors sheet
+	cell("N14")=0
+	cell("H16")=0
+	
+	Select cell("H17")
+	curr_trial=0
+	diff= cell("f23")  (At Present it has 0.136359)
+	
+	dowhile(diff>0.00005 && curr_trial < 20)
+	{
+		select factors sheet
+		
+		select cell("p14") and copy its value
+		
+		select cell("N14") and paste here
+		
+		select cell("F24") and copy its value
+		
+		select cell("H16") and paste here
+		
+		select factors sheet
+		
+		Calculate
+		
+		curr_trial = cell("N14")
+		diff = cell("F23")
+	}
+}
+	
+---------------------------------------------------------------------------------------------------------
+	
+	
+	Sub Factors1()
+	{
+  select cell("A48") and copy its value
+  
+  select Factors sheet
+  select cell("B8") and paste the value
+  
+  select Sheets("Calc")
+  select cell("A49") and copy the cell value
+  select Factors sheet
+  select cell("B9") and paste the value
+  
+  select Factors sheet
+  select cell ("B19") and copy its value
+  select Calc sheet
+  select cell("B48") and paste the value
+  
+  
+  select Factors Sheet
+  Select cell("B20") and copy its value
+  select Calc sheet
+  select cell("B49") and paste the value
+  select Factors sheet
+  select cell("B21") and copy its value
+  select sheet Calc
+  select cell("B52") and paste the value
+  
+  select Factors sheet
+  Application.Run Macro:="RAP.XLS!Macro1"
+  select cell("B22") and copy its value
+  select sheet Calc
+  select cell("E48") and paste the value
+  
+  select Factors sheet
+  select cell("B23") and copy its value
+  select Calc Sheet
+  select cell("E49") and paste the value
+  
+  select Factors Sheet
+  select cell("B24") and copy its value
+  select sheet Calc
+  select cell("E52") and paste its value
+  
+  select Factors sheet
+  select cell("B15") and copy its value
+  select Calc sheet
+  select cell("B58") and paste the value
+  
+}
+
+
+----------------------------------------------------------------------------------------------------------
+
+Sub Factors2()
+{
+  Select Calc sheet
+   select cell("A50") and copy its value
+  select Factors sheet
+  select cell("B9") and paste the value
+  select cell("B20") and copy its value
+  select Calc sheet
+  select cell("B50") and paste the value
+  
+  select Factors sheet
+  select cell("B21") and copy its value
+  select Calc sheet
+  select cell("B53") and paste the value
+  
+  
+  select cell("C56") and copy its value
+  select Factors sheet
+  select cell("B9") and paste the value
+  select cell("B21") and copy its value
+  select Calc sheet
+  select cell("B55") and paste the value
+  
+  select Calc sheet
+  select cell("A49") and copy its value
+  select Factors sheet
+  select cell("B8") and paste the value
+  
+  select Calc Sheet
+  select cell("a50") and copy its value
+  select Factors sheet
+  select cell("b9") and paste the value
+  
+  select cell("B21") and copy its value
+  select Calc sheet
+  select cell("B53") and paste the value
+
+}
