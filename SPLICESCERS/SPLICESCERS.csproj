@@ -102,8 +102,13 @@
     <None Include="Data\31752B.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Data\GAMqx.json" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Notes\Notes.txt" />
+    <Content Include="Notes\questions.txt" />
+    <Content Include="Notes\resource.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

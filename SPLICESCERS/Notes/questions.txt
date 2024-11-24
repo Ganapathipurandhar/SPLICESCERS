@@ -1,0 +1,4 @@
+* Integrated Service Computation divides Days by 261 which is the number of working days in a year. However the condition to check for Retirement Type = SR does nothing
+
+* I couldn't find 1981 General Disability Mortality Table
+* GAM94 and GAF94 don't match the SOA table in the excel after age 115

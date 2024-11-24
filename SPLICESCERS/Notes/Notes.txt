@@ -1,0 +1,7 @@
+*Integrated Service Computation divides Days by 261 which is the number of working days in a year. However the condition to check for Retirement Type = SR does nothing
+
+If you are covered by Social Security (meaning that you contribute to Social Security), your
+retirement contributions to FCERA have been reduced and, therefore, you will receive a slightly
+reduced retirement allowance. This reduction can be accomplished by reducing your final
+monthly compensation by $116.67. 
+

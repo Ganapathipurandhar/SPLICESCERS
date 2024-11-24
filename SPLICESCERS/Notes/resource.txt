@@ -1,0 +1,20 @@
+Sacramento County Employees' Retirement System Factors for modification as per Section 31810
+https://www.scers.org/sites/main/files/file-attachments/service_retirement_application_packet_0.pdf
+
+https://www.scers.gov/sites/main/files/file-attachments/final_legacy_handbook_2024.pdf?1716592893
+
+ERF Fractions Tables:
+https://sacrs.org/Portals/36/assets/File/CERL/RetirementLawBook-2020-webversion.pdf?ver=2020-01-02-165408-640
+ERF Fractions
+31664 (Page 230+ on PDF page no. is 189+)
+31676_10 (Page 240+ page no. 199+)
+31752A ( Page 319+ page no. 278+)
+31752B ( Page 319+ page no. 278+)
+
+Factor Calculation:
+https://www.ssa.gov/oact/HistEst/CohLifeTables/LifeTableDefinitions.pdf
+
+GAM: Group Annuity Mortality Table 
+https://www.soa.org/globalassets/assets/library/research/transactions-of-society-of-actuaries/1990-95/1995/january/tsa95v4722.pdf
+- Page 22 : 1994 Group Annuity Mortality Table (also known as the UP-94 Mortality Table) for males
+- I couldn't find 1981 General Disability Mortality Table
