@@ -17,14 +17,14 @@ namespace SPLICESCERS.Types
 	/// Page 22 : 1994 Group Annuity Mortality Table(also known as the UP-94 Mortality Table) for males
 	/// I couldn't find 1981 General Disability Mortality Table
 	/// </summary>
-	public class GAM
+	public class DisGAM
 	{
-		private int age;
-		private double gAM94qx;
-		private double gAF94qx;		
+		private int age;		
+		private double disGenqx;
+		private double disSafeqx;
 
-		public int Age { get => age; set => age = value; }
-		public double GAM94qx { get => gAM94qx; set => gAM94qx = value; }
-		public double GAF94qx { get => gAF94qx; set => gAF94qx = value; }
+		public int Age { get => age; set => age = value; }		
+		public double DisGenqx { get => disGenqx; set => disGenqx = value; }
+		public double DisSafeqx { get => disSafeqx; set => disSafeqx = value; }
 	}
 }
