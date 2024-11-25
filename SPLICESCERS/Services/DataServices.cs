@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SPLICESCERS.Services
 {
-	public static class ERFService
+	public static class DataServices
 	{
 		private static List<ERF> erf31676_10;
 		private static List<ERF> erf31664;

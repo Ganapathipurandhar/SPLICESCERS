@@ -114,12 +114,12 @@ namespace SPLICESCERS.Services
             if (_workData.Membership == MembershipType.General)
             {
                 _workData.ERFArticle = "ERF 31676.1";
-				_workData.ERFFraction = ERFService.GetFraction(ERFService.ERF31676_10, _workData.MemberInfo.Age1by4);
+				_workData.ERFFraction = DataServices.GetFraction(DataServices.ERF31676_10, _workData.MemberInfo.Age1by4);
 			}
             else 
             {
                 _workData.ERFArticle = "ERF 31664";
-				_workData.ERFFraction = ERFService.GetFraction(ERFService.ERF31664, _workData.MemberInfo.Age1by4);
+				_workData.ERFFraction = DataServices.GetFraction(DataServices.ERF31664, _workData.MemberInfo.Age1by4);
 			}
 		}
 

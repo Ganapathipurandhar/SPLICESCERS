@@ -79,7 +79,7 @@
     <Compile Include="JsonFileReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ERFService.cs" />
+    <Compile Include="Services\DataServices.cs" />
     <Compile Include="test.cs" />
     <Compile Include="Types\DurationYMDs.cs" />
     <Compile Include="Types\ERF.cs" />

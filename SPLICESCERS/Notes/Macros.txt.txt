@@ -87,7 +87,7 @@ sub Macro1{
 Sub Factors2()
 {
   Select Calc sheet
-   select cell("A50") and copy its value
+  select cell("A50") and copy its value
   select Factors sheet
   select cell("B9") and paste the value
   select cell("B20") and copy its value
