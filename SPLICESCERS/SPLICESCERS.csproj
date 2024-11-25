@@ -83,6 +83,7 @@
     <Compile Include="test.cs" />
     <Compile Include="Types\DurationYMDs.cs" />
     <Compile Include="Types\ERF.cs" />
+    <Compile Include="Types\GAM.cs" />
     <Compile Include="Types\PersonInfo.cs" />
     <Compile Include="Types\ScersEnums.cs" />
     <Compile Include="Types\WorkData.cs" />
@@ -108,7 +109,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Macros.txt.txt" />
+    <Content Include="Notes\Macros.txt.txt" />
+    <Content Include="Notes\Notes.txt" />
+    <Content Include="Notes\questions.txt" />
+    <Content Include="Notes\resource.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
