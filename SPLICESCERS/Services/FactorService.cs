@@ -48,6 +48,7 @@ namespace SPLICESCERS.Services
 				LifeTables.Add(lf);
 			}
 
+
 			
 			//Update Nx Value
 			for (int j=114 ; j > -1; j--) 
@@ -62,6 +63,7 @@ namespace SPLICESCERS.Services
 				}
 			}
 
+			FileServices.ListToCsv(LifeTables);
 		}
 
 		public void print(test test) 
