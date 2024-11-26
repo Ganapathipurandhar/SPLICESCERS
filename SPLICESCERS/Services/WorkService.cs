@@ -143,9 +143,10 @@ namespace SPLICESCERS.Services
             _workData.NonIntegrateBenefits = (_workData.FinalComp / _divider) * (_workData.TotalNonIS * _workData.ERFFraction);
             _workData.ServiceRetirementBenefits = _workData.IntegrateBenefits + _workData.NonIntegrateBenefits;
 
-            //_workData.MoneyPurchaseCalc// TODO 
-            //CalculateNSCD
-            _workData.NSCDArticle = (_workData.Tier == Tiers.Two || _workData.Tier == Tiers.Three) ? "NSCD: 31727.7" : "NSCD";
+			//_workData.MoneyPurchaseCalc// TODO 
+
+			//Calculate NSCD (Non-Service connected Disability)
+			_workData.NSCDArticle = (_workData.Tier == Tiers.Two || _workData.Tier == Tiers.Three) ? "NSCD: 31727.7" : "NSCD";
             if (_workData.Tier == Tiers.Two || _workData.Tier == Tiers.Three) 
             {
                 //(0.1 + 0.02 * MINA(15, FLOOR(B28, 1)))*B31                
@@ -156,7 +157,7 @@ namespace SPLICESCERS.Services
 			}
             else 
             {
-                //TODO - 
+                //TODO - Have NA Flag
                 
                 if (_workData.TypeOfRetirement == RetirementType.NSCD)
                 {
@@ -180,8 +181,14 @@ namespace SPLICESCERS.Services
                                     _workData.ServiceRetirementBenefits, _workData.Benefit90Perc };
                 _workData.NSCDFraction = maxlist.Max();
 
-			}
+                
 
+			}
+            //Life Table Computation Age Options
+			_workData.XMinusY = (int)(Math.Truncate(_workData.MemberInfo.Age) - Math.Truncate(_workData.BeneficiaryInfo.Age));
+			_workData.XMinusYPlus1 = (int)(Math.Truncate(_workData.MemberInfo.Age) - (Math.Truncate(_workData.BeneficiaryInfo.Age)+1));
+            _workData.XPlus1MinusY = (int)((Math.Truncate(_workData.MemberInfo.Age)+1) - Math.Truncate(_workData.BeneficiaryInfo.Age));
+            _workData.XPlus1MinusYPlus1 = (int)((Math.Truncate(_workData.MemberInfo.Age) + 1) - (Math.Truncate(_workData.BeneficiaryInfo.Age) + 1));
 		}
 
 		public void PrintProperty(object t) 

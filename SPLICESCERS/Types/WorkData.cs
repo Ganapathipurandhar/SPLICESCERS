@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SPLICESCERS.Types
 {
-	public  class WorkData
+	public class WorkData
 	{
 		private RetirementType typeOfRetirement;
 		private DateTime dateOfRetirement;
@@ -124,7 +124,12 @@ namespace SPLICESCERS.Types
 		public int BeneficiaryMortalityTable { get => beneficiaryMortalityTable; set => beneficiaryMortalityTable = value; }
 		public int BeneficiarySetback { get => beneficiarySetback; set => beneficiarySetback = value; }
 
-		
+		//Member Age - Beneficiary Age - Calculating Life Table for 4 different Option
+		public int XMinusY { get; set; }
+		public int XMinusYPlus1 { get; set; }
+		public int XPlus1MinusY { get; set; }
+		public int XPlus1MinusYPlus1 { get; set; }
+
 
 	}
 }   
