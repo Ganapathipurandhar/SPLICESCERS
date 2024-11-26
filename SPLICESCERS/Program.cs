@@ -20,7 +20,13 @@ namespace SPLICESCERS
 			_test.print("****************************************************************");
 			_test.print("Compute worksheet based on input and according to cell equation");
 			_test.print("*****************************************************************");
-			workService.ComputeWorkSheet();			
+			workService.ComputeWorkSheet();
+			_test.print("****************************************************************");
+			_test.print("Compute Factors based on input and according to cell equation");
+			_test.print("*****************************************************************");
+			FactorService fs = new FactorService(workService);
+			fs.CalcLifeTable();
+			fs.print(_test);
 
 			Console.ReadKey();
 		}

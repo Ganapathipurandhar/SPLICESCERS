@@ -15,6 +15,8 @@ namespace SPLICESCERS.Services
         }
 		public WorkService(string name) { }
 
+        public WorkData WD {  get { return _workData; } }
+
         public void LoadData()
         {
             var applicationSettings = ConfigurationManager.GetSection("appSettings") as NameValueCollection;
@@ -70,7 +72,11 @@ namespace SPLICESCERS.Services
                 _workData.NonISSick.Days = Convert.ToDouble(applicationSettings["SLNID"]);
 
                 _workData.FinalComp = Convert.ToDouble(applicationSettings["FinalComp"]);
-            }
+
+				_workData.InterestRate = Convert.ToDouble(applicationSettings["InterestRate"]);
+				_workData.COLA = Convert.ToDouble(applicationSettings["COLA"]);			
+
+			}
 
         }
 

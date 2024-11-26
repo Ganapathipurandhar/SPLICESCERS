@@ -21,6 +21,10 @@ namespace SPLICESCERS.Types
 		private DurationYMDs nonIntegratedService = new DurationYMDs();
 		private DurationYMDs nonISSick = new DurationYMDs();
 		private double finalComp;
+		private double interestRate;
+		private double cOLA;
+
+
 		private string relationShip;
 		private double eEContrBasic;
 		private double eEContrCol;
@@ -39,8 +43,13 @@ namespace SPLICESCERS.Types
 		private double moneyPurchaseCalc;
 		private string nscdArticle;
 		private double nscdFraction;
+		//TODO : This defaults will need to be calculated, temp setup to run factors
 
-
+		private int memberMortalityTable = 1;
+		private int memberSetback = -3;
+		private int beneficiaryMortalityTable = 1;
+		private int beneficiarySetback = -3;
+	
 
 		#region InputValueFromConfig
 
@@ -74,6 +83,9 @@ namespace SPLICESCERS.Types
 
 		//Final Compensation
 		public double FinalComp { get => finalComp; set => finalComp = value; }
+
+		public double InterestRate { get => interestRate; set => interestRate = value; }
+		public double COLA { get => cOLA; set => cOLA = value; } //Cost of Living Allowance
 		#endregion
 
 		//Computed Values for Work -Sheet
@@ -103,6 +115,16 @@ namespace SPLICESCERS.Types
 		public double ServiceProjected { get; set; }
 		public DateTime ServiceProjAge65 { get; set; }
 		public double SerRetDiff { get; set; }//ServiceProjAge65 and DateOfRetirement difference
+
+		//Mortality Table
+		//TODO
+		//Values for this will be hardcoded temporarily and programmed later
+		public int MemberMortalityTable { get => memberMortalityTable; set => memberMortalityTable = value; }
+		public int MemberSetback { get => memberSetback; set => memberSetback = value; }
+		public int BeneficiaryMortalityTable { get => beneficiaryMortalityTable; set => beneficiaryMortalityTable = value; }
+		public int BeneficiarySetback { get => beneficiarySetback; set => beneficiarySetback = value; }
+
+		
 
 	}
 }   
