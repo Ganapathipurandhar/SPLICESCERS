@@ -33,7 +33,7 @@ namespace SPLICESCERS
             foreach (var item in items)
             {
                 // Write Fields
-                csv.AppendLine(string.Join(delimiter, props.Select(p => GetCsvFieldasedOnValue(p, item))));
+                csv.AppendLine(string.Join(delimiter, props.Select(p => GetCsvFieldbasedOnValue(p, item))));
             }
 
             return csv.ToString();
@@ -46,7 +46,7 @@ namespace SPLICESCERS
         /// <param name="p"></param>
         /// <param name="item"></param>
         /// <returns></returns>
-        private static object GetCsvFieldasedOnValue<T>(PropertyInfo p, T item)
+        private static object GetCsvFieldbasedOnValue<T>(PropertyInfo p, T item)
         {
             string value = "";
 
