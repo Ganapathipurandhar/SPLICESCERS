@@ -29,8 +29,8 @@ namespace SPLICESCERS.Services
 			{
 				var lf = new LifeTable();
 				lf.Age = i;
-				var gamAge = lf.Age + workData.MemberSetback;
-				if (gamAge <= 0)
+				var MemAge = lf.Age + workData.MemberSetback;
+				if (MemAge <= 0)
 				{
 					lf.Memberqx = 0;
 					lf.Memberlx = 1;
@@ -38,7 +38,7 @@ namespace SPLICESCERS.Services
 				else 
 				{
 					//TODO : Need condition for GAM vs GAF value
-					lf.Memberqx = DataServices.GAMqx.FirstOrDefault(g => g.Age == gamAge).GAM94qx;
+					lf.Memberqx = DataServices.GAMqx.FirstOrDefault(g => g.Age == MemAge).GAM94qx;
 					lf.Memberlx = LifeTables[i - 1].Memberlx * (1 - LifeTables[i - 1].Memberqx);
 				}
 
