@@ -37,7 +37,7 @@ namespace SPLICESCERS.Services
 
 		public static  List<T> LoadJson<T>(string path)
 		{
-			var list = JsonFileReader.Read<T>(path);
+			var list = FileServices.ReadJson<T>(path);
 			return list;
 		}
 
