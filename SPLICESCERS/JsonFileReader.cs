@@ -15,6 +15,12 @@ namespace SPLICESCERS
             string text = File.ReadAllText(filePath);
             return JsonSerializer.Deserialize<List<T>>(text);
         }
+
+        public static string ListToJson<T>(List<T> list)
+        {
+            return JsonSerializer.Serialize(list); 
+        }
+
     }
 
 }
