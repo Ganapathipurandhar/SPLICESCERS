@@ -180,15 +180,14 @@ namespace SPLICESCERS.Services
 				double[] maxlist = { Math.Min(_workData.FAS1by3, _workData.ServiceProjected),
                                     _workData.ServiceRetirementBenefits, _workData.Benefit90Perc };
                 _workData.NSCDFraction = maxlist.Max();
-
-                
-
 			}
+
             //Life Table Computation Age Options
 			_workData.XMinusY = (int)(Math.Truncate(_workData.MemberInfo.Age) - Math.Truncate(_workData.BeneficiaryInfo.Age));
 			_workData.XMinusYPlus1 = (int)(Math.Truncate(_workData.MemberInfo.Age) - (Math.Truncate(_workData.BeneficiaryInfo.Age)+1));
             _workData.XPlus1MinusY = (int)((Math.Truncate(_workData.MemberInfo.Age)+1) - Math.Truncate(_workData.BeneficiaryInfo.Age));
             _workData.XPlus1MinusYPlus1 = (int)((Math.Truncate(_workData.MemberInfo.Age) + 1) - (Math.Truncate(_workData.BeneficiaryInfo.Age) + 1));
+			_workData.IRCOLA =(1+_workData.InterestRate)/(1+_workData.COLA)-1;
 		}
 
 		public void PrintProperty(object t) 

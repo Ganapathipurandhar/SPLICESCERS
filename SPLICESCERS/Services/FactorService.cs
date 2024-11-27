@@ -165,29 +165,55 @@ namespace SPLICESCERS.Services
 				}
 			}
 
+			//TODO - 0.5 is
+			//ETx and ETy
+			for (int i = 0; i < 116; i++)
+			{
+				if (i != 115)
+				{
+					LifeTables[i].ETx = LifeTables.Skip(i + 1).Sum(x => x.lx) / LifeTables[i].lx + 0.5;
+					LifeTables[i].ETy = LifeTables.Skip(i + 1).Sum(x => x.ly) / LifeTables[i].ly + 0.5;
+					LifeTables[i].Mx = LifeTables.Skip(i).Sum(x => x.qx * x.Dx) / (1 + workData.InterestRate);					
+				}
+				else
+				{
+					LifeTables[i].ETx = LifeTables.Skip(i).Sum(x => x.lx) / LifeTables[i].lx + 0.5;
+					LifeTables[i].ETy = LifeTables.Skip(i).Sum(x => x.ly) / LifeTables[i].ly + 0.5;
+					LifeTables[i].Mx = LifeTables.Skip(i).Sum(x => x.qx * x.Dx) / (1 + workData.InterestRate);					
+				}
+			}
 
-			//for (int i = 0; i < 116; i++) 
-			//{
-			//X-Y (Memeber Age - Beneficiary Age)
-			//if (i == 0)
-			//{
-			//	LifeTables[i].lxy = 1;
-			//	LifeTables[i].Dxy = LifeTables[i].lxy * LifeTables[i].vx;
-			//}
-			//else
-			//{
-			//	var ageF = (LifeTables[0].Age > (LifeTables[i - 1].Age - workData.XMinusY)) ?
-			//					LifeTables[0].Age : (LifeTables[i - 1].Age - workData.XMinusY);
+			//Rx and Prime Computation
+			for (int i = 0; i < 116; i++)
+			{
+				if (i != 115)
+				{					
+					LifeTables[i].Rx = LifeTables.Skip(i).Sum(x => x.Mx);					
+				}
+				else
+				{					
+					LifeTables[i].Rx = LifeTables.Skip(i).Sum(x => x.Mx);
+				}
+				LifeTables[i].vxPrime = Math.Pow(1/(1 + workData.IRCOLA), LifeTables[i].Age);
+				LifeTables[i].DxPrime = LifeTables[i].vxPrime * LifeTables[i].lx;
+				LifeTables[i].vyPrime = Math.Pow(1 / (1 + workData.IRCOLA), LifeTables[i].Age);
+				LifeTables[i].DyPrime = LifeTables[i].vyPrime * LifeTables[i].ly;
+			}
 
-			//	LifeTables[i].lxy = LifeTables[i - 1].lxy * (1 - LifeTables[i - 1].qx) *
-			//		(1 - LifeTables[ageF].qy);
-			//	LifeTables[i].Dxy = LifeTables[i].lxy * LifeTables[i].vx;
-			//}
-			////}
+			for (int j = 115; j > -1; j--)
+			{
+				if (j != 115)
+				{					
+					LifeTables[j].NxPrime = LifeTables[j].DxPrime + LifeTables[j + 1].NxPrime;
+					LifeTables[j].NyPrime = LifeTables[j].DyPrime + LifeTables[j + 1].NyPrime;
+				}
+				else
+				{
+					LifeTables[j].NyPrime = LifeTables[j].DyPrime;
+				}
+			}
 
-
-
-
+			FileServices.ListToCsv( LifeTables );
 		}
 
 		public void print(test test) 
@@ -205,9 +231,10 @@ namespace SPLICESCERS.Services
 					//LifeTables[i].vy.ToString() + " : " +
 					//LifeTables[i].Dy.ToString() + " : " +
 					//LifeTables[i].Ny.ToString() + " : " +
-					LifeTables[i].lx1y1.ToString() + " : " +
-					LifeTables[i].Dx1y1.ToString() + " : " +
-					LifeTables[i].Nx1y1.ToString() 
+					//LifeTables[i].lx1y1.ToString() + " : " +
+					LifeTables[i].vyPrime.ToString() + " : " +
+					LifeTables[i].DyPrime.ToString() + " : " +
+					LifeTables[i].NyPrime.ToString()
 					);
 			}
 		}

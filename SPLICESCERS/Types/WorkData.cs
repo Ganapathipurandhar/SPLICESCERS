@@ -86,6 +86,7 @@ namespace SPLICESCERS.Types
 
 		public double InterestRate { get => interestRate; set => interestRate = value; }
 		public double COLA { get => cOLA; set => cOLA = value; } //Cost of Living Allowance
+		
 		#endregion
 
 		//Computed Values for Work -Sheet
@@ -129,6 +130,8 @@ namespace SPLICESCERS.Types
 		public int XMinusYPlus1 { get; set; }
 		public int XPlus1MinusY { get; set; }
 		public int XPlus1MinusYPlus1 { get; set; }
+
+		public double IRCOLA { get; set; }
 
 
 	}
