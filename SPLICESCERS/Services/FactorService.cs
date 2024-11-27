@@ -198,6 +198,11 @@ namespace SPLICESCERS.Services
 				LifeTables[i].DxPrime = LifeTables[i].vxPrime * LifeTables[i].lx;
 				LifeTables[i].vyPrime = Math.Pow(1 / (1 + workData.IRCOLA), LifeTables[i].Age);
 				LifeTables[i].DyPrime = LifeTables[i].vyPrime * LifeTables[i].ly;
+				LifeTables[i].DxyPrime = LifeTables[i].lxy * LifeTables[i].vxPrime;
+				LifeTables[i].Dxy1Prime = LifeTables[i].lxy1 * LifeTables[i].vxPrime;
+				LifeTables[i].Dx1yPrime = LifeTables[i].lx1y * LifeTables[i].vxPrime;
+				LifeTables[i].Dx1y1Prime = LifeTables[i].lx1y1 * LifeTables[i].vxPrime;
+
 			}
 
 			for (int j = 115; j > -1; j--)
@@ -206,10 +211,19 @@ namespace SPLICESCERS.Services
 				{					
 					LifeTables[j].NxPrime = LifeTables[j].DxPrime + LifeTables[j + 1].NxPrime;
 					LifeTables[j].NyPrime = LifeTables[j].DyPrime + LifeTables[j + 1].NyPrime;
+					LifeTables[j].NxyPrime = LifeTables[j].DxyPrime + LifeTables[j + 1].NxyPrime;
+					LifeTables[j].Nxy1Prime = LifeTables[j].Dxy1Prime + LifeTables[j + 1].Nxy1Prime;
+					LifeTables[j].Nx1yPrime = LifeTables[j].Dx1yPrime + LifeTables[j + 1].Nx1yPrime;
+					LifeTables[j].Nx1y1Prime = LifeTables[j].Dx1y1Prime + LifeTables[j + 1].Nx1y1Prime;
 				}
 				else
 				{
+					LifeTables[j].NxPrime = LifeTables[j].DxPrime;
 					LifeTables[j].NyPrime = LifeTables[j].DyPrime;
+					LifeTables[j].NxyPrime = LifeTables[j].DxyPrime;
+					LifeTables[j].Nxy1Prime = LifeTables[j].Dxy1Prime;
+					LifeTables[j].Nx1yPrime = LifeTables[j].Dx1yPrime;
+					LifeTables[j].Nx1y1Prime = LifeTables[j].Dx1y1Prime;
 				}
 			}
 
@@ -232,9 +246,9 @@ namespace SPLICESCERS.Services
 					//LifeTables[i].Dy.ToString() + " : " +
 					//LifeTables[i].Ny.ToString() + " : " +
 					//LifeTables[i].lx1y1.ToString() + " : " +
-					LifeTables[i].vyPrime.ToString() + " : " +
-					LifeTables[i].DyPrime.ToString() + " : " +
-					LifeTables[i].NyPrime.ToString()
+					//LifeTables[i].vyPrime.ToString() + " : " +
+					LifeTables[i].Dx1y1Prime.ToString() + " : " +
+					LifeTables[i].Nx1y1Prime.ToString()
 					);
 			}
 		}

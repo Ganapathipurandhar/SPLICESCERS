@@ -133,6 +133,13 @@ namespace SPLICESCERS.Types
 
 		public double IRCOLA { get; set; }
 
+		//Option Factor Computation
+		public double Option1 { get; set; }
+		public double Option2 { get; set; }
+		public double Option3 { get; set; }
+		public double Option4 { get; set; }
+
+
 
 	}
 }   

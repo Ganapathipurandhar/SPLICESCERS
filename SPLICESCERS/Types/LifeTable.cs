@@ -63,12 +63,21 @@ namespace SPLICESCERS.Types
 		public double Mx { get; set; }
 		public double Rx { get; set; }
 
+		//Factor Prime(')
 		public double vxPrime { get; set; }
 		public double DxPrime { get; set; }
 		public double NxPrime { get; set; }
 		public double vyPrime { get; set; }
 		public double DyPrime { get; set; }
 		public double NyPrime { get; set; }
+		public double DxyPrime { get; set; }//lxy * vxPrime
+		public double NxyPrime { get; set; }
+		public double Dxy1Prime { get; set; }
+		public double Nxy1Prime { get; set; }
+		public double Dx1yPrime { get; set; }
+		public double Nx1yPrime { get; set; }
+		public double Dx1y1Prime { get; set; }
+		public double Nx1y1Prime { get; set; }
 
 	}
 }
