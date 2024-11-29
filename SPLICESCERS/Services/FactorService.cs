@@ -226,8 +226,14 @@ namespace SPLICESCERS.Services
 					LifeTables[j].Nx1y1Prime = LifeTables[j].Dx1y1Prime;
 				}
 			}
-
 			FileServices.ListToCsv( LifeTables );
+
+			//Factor 
+			var _age = Math.Truncate(workData.MemberInfo.Age);
+			var tnxy = LifeTables.FirstOrDefault(x => x.Age == _age).Nxy;
+			var tdxy = LifeTables.FirstOrDefault(x => x.Age == _age).Dxy;
+			workData.ADueXY_12 = (LifeTables.FirstOrDefault(x => x.Age == _age).Nxy /
+				 LifeTables.FirstOrDefault(x => x.Age == _age).Dxy);
 		}
 
 		public void print(test test) 
@@ -247,8 +253,9 @@ namespace SPLICESCERS.Services
 					//LifeTables[i].Ny.ToString() + " : " +
 					//LifeTables[i].lx1y1.ToString() + " : " +
 					//LifeTables[i].vyPrime.ToString() + " : " +
-					LifeTables[i].Dx1y1Prime.ToString() + " : " +
-					LifeTables[i].Nx1y1Prime.ToString()
+					//LifeTables[i].Dx1y1Prime.ToString() + " : " +
+					//LifeTables[i].Nx1y1Prime.ToString()
+					""
 					);
 			}
 		}

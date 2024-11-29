@@ -8,56 +8,26 @@ using System.Threading.Tasks;
 namespace SPLICESCERS.Types
 {
 	public class WorkData
-	{
-		private RetirementType typeOfRetirement;
-		private DateTime dateOfRetirement;
-		private MembershipType membership;
-		private Tiers tier;
-		private YesNo moneyPurchase;
+	{		
 		private PersonInfo memberInfo = new PersonInfo();
 		private PersonInfo beneficiaryInfo = new PersonInfo();
 		private DurationYMDs integratedService = new DurationYMDs();
 		private DurationYMDs iSSick = new DurationYMDs();
 		private DurationYMDs nonIntegratedService = new DurationYMDs();
-		private DurationYMDs nonISSick = new DurationYMDs();
-		private double finalComp;
-		private double interestRate;
-		private double cOLA;
+		private DurationYMDs nonISSick = new DurationYMDs();		
 
-
-		private string relationShip;
-		private double eEContrBasic;
-		private double eEContrCol;
-		private double iSDuration;
-		private double iSSickDuration;
-		private double totalIS;
-		private double nonISDuration;
-		private double nonISSickDuration;
-		private double totalNonIS;
-		private double totalService;
-		private string erfArticle;
-		private double erfFraction;
-		private double integrateBenefits;
-		private double nonIntegrateBenefits;
-		private double serviceRetirementBenefits;
-		private double moneyPurchaseCalc;
-		private string nscdArticle;
-		private double nscdFraction;
 		//TODO : This defaults will need to be calculated, temp setup to run factors
-
 		private int memberMortalityTable = 1;
 		private int memberSetback = -3;
 		private int beneficiaryMortalityTable = 1;
-		private int beneficiarySetback = -3;
-	
+		private int beneficiarySetback = -3;	
 
 		#region InputValueFromConfig
-
-		public RetirementType TypeOfRetirement { get => typeOfRetirement; set => typeOfRetirement = value; }
-		public DateTime DateOfRetirement { get => dateOfRetirement; set => dateOfRetirement = value; }
-		public MembershipType Membership { get => membership; set => membership = value; }
-		public Tiers Tier { get => tier; set => tier = value; }
-		public YesNo MoneyPurchase { get => moneyPurchase; set => moneyPurchase = value; }
+		public RetirementType TypeOfRetirement { get; set; }
+		public DateTime DateOfRetirement { get; set; }
+		public MembershipType Membership { get; set; }
+		public Tiers Tier { get; set; }
+		public YesNo MoneyPurchase { get; set; }
 
 		//Member Information
 		public PersonInfo MemberInfo { get => memberInfo; set => memberInfo = value; }
@@ -67,7 +37,7 @@ namespace SPLICESCERS.Types
 		//TODO
 		//Options are Spouse and Partner (Registered Domestic Partner)
 		//RelationShip we will use string for now, but will change it to Enum later when we know all options
-		public string RelationShip { get => relationShip; set => relationShip = value; }
+		public string RelationShip { get; set; }
 
 		//Duration of Integrated Service(IS) and Sick Leave
 		public DurationYMDs IntegratedService { get => integratedService; set => integratedService = value; }
@@ -78,39 +48,38 @@ namespace SPLICESCERS.Types
 		public DurationYMDs NonISSick { get => nonISSick; set => nonISSick = value; }
 
 		//Employee Contriubtion (EE Contr)
-		public double EEContrBasic { get => eEContrBasic; set => eEContrBasic = value; }
-		public double EEContrCol { get => eEContrCol; set => eEContrCol = value; }
+		public double EEContrBasic { get; set; }
+		public double EEContrCol { get; set; }
 
 		//Final Compensation
-		public double FinalComp { get => finalComp; set => finalComp = value; }
+		//public double FinalComp { get => finalComp; set => finalComp = value; }
+		public double FinalComp { get; set; }
 
-		public double InterestRate { get => interestRate; set => interestRate = value; }
-		public double COLA { get => cOLA; set => cOLA = value; } //Cost of Living Allowance
+		public double InterestRate { get; set; }
+		public double COLA { get; set; } //Cost of Living Allowance
 		
 		#endregion
 
 		//Computed Values for Work -Sheet
-		public double ISDuration { get => iSDuration; set => iSDuration = value; }
-		public double ISSickDuration { get => iSSickDuration; set => iSSickDuration = value; }
-		public double TotalIS { get => totalIS; set => totalIS = value; }
-
-		public double NonISDuration { get => nonISDuration; set => nonISDuration = value; }
-		public double NonISSickDuration { get => nonISSickDuration; set => nonISSickDuration = value; }
-		public double TotalNonIS { get => totalNonIS; set => totalNonIS = value; }
-
-		public double TotalService { get => totalService; set => totalService = value; }
+		public double ISDuration { get; set; }
+		public double ISSickDuration { get; set; }
+		public double TotalIS { get; set; }
+		public double NonISDuration { get; set; }
+		public double NonISSickDuration { get; set; }
+		public double TotalNonIS { get; set; }
+		public double TotalService { get; set; }
 
 		//Article Number it will either 31676.1 or 31664"
-		public string ERFArticle { get => erfArticle; set => erfArticle = value; }
-		public double ERFFraction { get => erfFraction; set => erfFraction = value; }
+		public string ERFArticle { get; set; }
+		public double ERFFraction { get; set; }
 
 		//Service Retirement Benefits
-		public double IntegrateBenefits { get => integrateBenefits; set => integrateBenefits = value; }
-		public double NonIntegrateBenefits { get => nonIntegrateBenefits; set => nonIntegrateBenefits = value; }
-		public double ServiceRetirementBenefits { get => serviceRetirementBenefits; set => serviceRetirementBenefits = value; }
-		public double MoneyPurchaseCalc { get => moneyPurchaseCalc; set => moneyPurchaseCalc = value; }//TODO: This needs to be calculated after calcData Sheet Completion
-		public string NSCDArticle { get => nscdArticle; set => nscdArticle = value; }
-		public double NSCDFraction { get => nscdFraction; set => nscdFraction = value; }
+		public double IntegrateBenefits { get; set; }
+		public double NonIntegrateBenefits { get; set; }
+		public double ServiceRetirementBenefits { get; set; }
+		public double MoneyPurchaseCalc { get; set; }//TODO: This needs to be calculated after calcData Sheet Completion
+		public string NSCDArticle { get; set; }
+		public double NSCDFraction { get; set; }
 		public double Benefit90Perc { get; set; }
 		public double FAS1by3 {  get; set; }
 		public double ServiceProjected { get; set; }
@@ -134,6 +103,11 @@ namespace SPLICESCERS.Types
 		public double IRCOLA { get; set; }
 
 		//Option Factor Computation
+		public double ADueXY_12 { get; set; }
+		public double ADueXY1_12 { get; set; }
+		public double ADueX1Y_12 { get; set; }
+		public double ADueX1Y1_12 { get; set; }
+
 		public double Option1 { get; set; }
 		public double Option2 { get; set; }
 		public double Option3 { get; set; }

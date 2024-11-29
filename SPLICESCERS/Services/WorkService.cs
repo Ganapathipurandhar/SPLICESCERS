@@ -99,7 +99,7 @@ namespace SPLICESCERS.Services
 
 			CalculateERF();
             CalculateServiceBenefit();
-			PrintProperty(_workData);
+			//PrintProperty(_workData);
 		}
 
         public void CalculateAgeAtRetirement(DateTime retirementDate, PersonInfo member) 

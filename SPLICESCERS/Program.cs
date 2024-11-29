@@ -26,7 +26,8 @@ namespace SPLICESCERS
 			_test.print("*****************************************************************");
 			FactorService fs = new FactorService(workService);
 			fs.CalcLifeTable();
-			fs.print(_test);
+			workService.PrintProperty(workService.WD);
+			//fs.print(_test);
 
 			Console.ReadKey();
 		}
