@@ -141,7 +141,7 @@ namespace SPLICESCERS.Services
 				LifeTables.Add(lf);
 			}
 			
-			//Update Nx Value for Beneficiary
+			//Update Nx, Ny[]... Value 
 			for (int j=115 ; j > -1; j--) 
 			{
 				if (j == 115)
@@ -165,36 +165,38 @@ namespace SPLICESCERS.Services
 				}
 			}
 
-			//TODO - 0.5 is
+			//TODO - 0.5 why are we using this Can't we use factor to convert frequency to pay
 			//ETx and ETy
+			#region ETx and ETy
 			for (int i = 0; i < 116; i++)
 			{
 				if (i != 115)
 				{
 					LifeTables[i].ETx = LifeTables.Skip(i + 1).Sum(x => x.lx) / LifeTables[i].lx + 0.5;
 					LifeTables[i].ETy = LifeTables.Skip(i + 1).Sum(x => x.ly) / LifeTables[i].ly + 0.5;
-					LifeTables[i].Mx = LifeTables.Skip(i).Sum(x => x.qx * x.Dx) / (1 + workData.InterestRate);					
+					LifeTables[i].Mx = LifeTables.Skip(i).Sum(x => x.qx * x.Dx) / (1 + workData.InterestRate);
 				}
 				else
 				{
 					LifeTables[i].ETx = LifeTables.Skip(i).Sum(x => x.lx) / LifeTables[i].lx + 0.5;
 					LifeTables[i].ETy = LifeTables.Skip(i).Sum(x => x.ly) / LifeTables[i].ly + 0.5;
-					LifeTables[i].Mx = LifeTables.Skip(i).Sum(x => x.qx * x.Dx) / (1 + workData.InterestRate);					
+					LifeTables[i].Mx = LifeTables.Skip(i).Sum(x => x.qx * x.Dx) / (1 + workData.InterestRate);
 				}
-			}
+			} 
+			#endregion
 
-			//Rx and Prime Computation
+			#region Rx and Prime Computation
 			for (int i = 0; i < 116; i++)
 			{
 				if (i != 115)
-				{					
-					LifeTables[i].Rx = LifeTables.Skip(i).Sum(x => x.Mx);					
-				}
-				else
-				{					
+				{
 					LifeTables[i].Rx = LifeTables.Skip(i).Sum(x => x.Mx);
 				}
-				LifeTables[i].vxPrime = Math.Pow(1/(1 + workData.IRCOLA), LifeTables[i].Age);
+				else
+				{
+					LifeTables[i].Rx = LifeTables.Skip(i).Sum(x => x.Mx);
+				}
+				LifeTables[i].vxPrime = Math.Pow(1 / (1 + workData.IRCOLA), LifeTables[i].Age);
 				LifeTables[i].DxPrime = LifeTables[i].vxPrime * LifeTables[i].lx;
 				LifeTables[i].vyPrime = Math.Pow(1 / (1 + workData.IRCOLA), LifeTables[i].Age);
 				LifeTables[i].DyPrime = LifeTables[i].vyPrime * LifeTables[i].ly;
@@ -202,13 +204,14 @@ namespace SPLICESCERS.Services
 				LifeTables[i].Dxy1Prime = LifeTables[i].lxy1 * LifeTables[i].vxPrime;
 				LifeTables[i].Dx1yPrime = LifeTables[i].lx1y * LifeTables[i].vxPrime;
 				LifeTables[i].Dx1y1Prime = LifeTables[i].lx1y1 * LifeTables[i].vxPrime;
+			} 
+			#endregion
 
-			}
-
+			#region Prime Table Computation
 			for (int j = 115; j > -1; j--)
 			{
 				if (j != 115)
-				{					
+				{
 					LifeTables[j].NxPrime = LifeTables[j].DxPrime + LifeTables[j + 1].NxPrime;
 					LifeTables[j].NyPrime = LifeTables[j].DyPrime + LifeTables[j + 1].NyPrime;
 					LifeTables[j].NxyPrime = LifeTables[j].DxyPrime + LifeTables[j + 1].NxyPrime;
@@ -225,15 +228,104 @@ namespace SPLICESCERS.Services
 					LifeTables[j].Nx1yPrime = LifeTables[j].Dx1yPrime;
 					LifeTables[j].Nx1y1Prime = LifeTables[j].Dx1y1Prime;
 				}
-			}
+			} 
+			#endregion
+
 			FileServices.ListToCsv( LifeTables );
 
-			//Factor 
+			//A Due Factor Computaton 
 			var _age = Math.Truncate(workData.MemberInfo.Age);
-			var tnxy = LifeTables.FirstOrDefault(x => x.Age == _age).Nxy;
-			var tdxy = LifeTables.FirstOrDefault(x => x.Age == _age).Dxy;
-			workData.ADueXY_12 = (LifeTables.FirstOrDefault(x => x.Age == _age).Nxy /
-				 LifeTables.FirstOrDefault(x => x.Age == _age).Dxy);
+			var _bage = Math.Truncate(workData.BeneficiaryInfo.Age);
+			
+			workData.XY = (LifeTables.FirstOrDefault(x => x.Age == _age).Nxy /
+				 LifeTables.FirstOrDefault(x => x.Age == _age).Dxy) - workData.FeqToPay;
+			workData.XY1 = (LifeTables.FirstOrDefault(x => x.Age == _age).Nxy1 /
+				 LifeTables.FirstOrDefault(x => x.Age == _age).Dxy1) - workData.FeqToPay;
+			workData.X1Y = (LifeTables.FirstOrDefault(x => x.Age == _age +1 ).Nx1y /
+				 LifeTables.FirstOrDefault(x => x.Age == _age+1).Dx1y) - workData.FeqToPay;
+			workData.X1Y1 = (LifeTables.FirstOrDefault(x => x.Age == _age + 1).Nx1y1 /
+				 LifeTables.FirstOrDefault(x => x.Age == _age + 1).Dx1y1) - workData.FeqToPay;
+
+			workData.XY14 = (workData.XY1 - workData.XY) * 
+								(workData.BeneficiaryInfo.Age1by4 - _bage) + workData.XY;
+			workData.X1Y14 = (workData.X1Y1 - workData.X1Y) *
+								(workData.BeneficiaryInfo.Age1by4 - _bage) + workData.X1Y;
+			//*****a due Joint Life(12)*****//
+			workData.X14Y14 = (workData.X1Y14 - workData.XY14) *
+								(workData.MemberInfo.Age1by4 - _age) + workData.XY14;
+			//Member Factor
+			workData.X = (LifeTables.FirstOrDefault(x => x.Age == _age).Nx /
+				 LifeTables.FirstOrDefault(x => x.Age == _age).Dx) - workData.FeqToPay;
+			workData.X1 = (LifeTables.FirstOrDefault(x => x.Age == _age+1).Nx /
+				 LifeTables.FirstOrDefault(x => x.Age == _age+1).Dx) - workData.FeqToPay;
+			//*****a due Retirement Age(12)*****//
+			workData.X14 = workData.X + (workData.X1 - workData.X) 
+									* (workData.MemberInfo.Age1by4 - _age);
+
+			//Beneficiary Factor
+			workData.Y = (LifeTables.FirstOrDefault(x => x.Age == _bage).Ny /
+				 LifeTables.FirstOrDefault(x => x.Age == _bage).Dy) - workData.FeqToPay;
+			workData.Y1 = (LifeTables.FirstOrDefault(x => x.Age == _bage + 1).Ny /
+				 LifeTables.FirstOrDefault(x => x.Age == _bage + 1).Dy) - workData.FeqToPay;
+			//*****a due Beneficiary Age(12)*****//
+			workData.Y14 = workData.Y + (workData.Y1 - workData.Y) 
+				* (workData.BeneficiaryInfo.Age1by4 - _bage);
+
+
+			//Prime Computation
+			workData.XYPrime = (LifeTables.FirstOrDefault(x => x.Age == _age).NxyPrime /
+				 LifeTables.FirstOrDefault(x => x.Age == _age).DxyPrime) - workData.FeqToPay;
+			workData.XY1Prime = (LifeTables.FirstOrDefault(x => x.Age == _age).Nxy1Prime /
+				 LifeTables.FirstOrDefault(x => x.Age == _age).Dxy1Prime) - workData.FeqToPay;
+			workData.X1YPrime = (LifeTables.FirstOrDefault(x => x.Age == _age + 1).Nx1yPrime /
+				 LifeTables.FirstOrDefault(x => x.Age == _age + 1).Dx1yPrime) - workData.FeqToPay;
+			workData.X1Y1Prime = (LifeTables.FirstOrDefault(x => x.Age == _age + 1).Nx1y1Prime /
+				 LifeTables.FirstOrDefault(x => x.Age == _age + 1).Dx1y1Prime) - workData.FeqToPay;
+
+			workData.XY14Prime = (workData.XY1Prime - workData.XYPrime) *
+								(workData.BeneficiaryInfo.Age1by4 - _bage) + workData.XYPrime;
+			workData.X1Y14Prime = (workData.X1Y1Prime - workData.X1YPrime) *
+								(workData.BeneficiaryInfo.Age1by4 - _bage) + workData.X1YPrime;
+			//*****a due Joint Life(12)*****//
+			workData.X14Y14Prime = (workData.X1Y14Prime - workData.XY14Prime) *
+								(workData.MemberInfo.Age1by4 - _age) + workData.XY14Prime;
+			//Member Factor
+			workData.XPrime = (LifeTables.FirstOrDefault(x => x.Age == _age).NxPrime /
+				 LifeTables.FirstOrDefault(x => x.Age == _age).DxPrime) - workData.FeqToPay;
+			workData.X1Prime = (LifeTables.FirstOrDefault(x => x.Age == _age + 1).NxPrime /
+				 LifeTables.FirstOrDefault(x => x.Age == _age + 1).DxPrime) - workData.FeqToPay;
+			//*****a due Retirement Age(12)*****//
+			workData.X14Prime = workData.XPrime + (workData.X1 - workData.XPrime)
+									* (workData.MemberInfo.Age1by4 - _age);
+
+			//Beneficiary Factor
+			workData.YPrime = (LifeTables.FirstOrDefault(x => x.Age == _bage).NyPrime /
+				 LifeTables.FirstOrDefault(x => x.Age == _bage).DyPrime) - workData.FeqToPay;
+			workData.Y1Prime = (LifeTables.FirstOrDefault(x => x.Age == _bage + 1).NyPrime /
+				 LifeTables.FirstOrDefault(x => x.Age == _bage + 1).DyPrime) - workData.FeqToPay;
+			//*****a due Beneficiary Age(12)*****//
+			workData.Y14Prime = workData.YPrime + (workData.Y1Prime - workData.YPrime)
+				* (workData.BeneficiaryInfo.Age1by4 - _bage);
+
+			//Mx
+			workData.MX = (LifeTables.FirstOrDefault(x => x.Age == _age).Mx * workData.InterestRate)
+						  /(Math.Log(1+workData.InterestRate));
+			workData.MX1 = (LifeTables.FirstOrDefault(x => x.Age == _age+1).Mx * workData.InterestRate)
+						  / (Math.Log(1 + workData.InterestRate));
+			workData.MX14 = (workData.MemberInfo.Age1by4 - _age) * (workData.MX1 - workData.MX) + workData.MX;
+
+			//Rx
+			workData.RX = (LifeTables.FirstOrDefault(x => x.Age == _age).Rx * workData.InterestRate)
+						  / (Math.Log(1 + workData.InterestRate));
+			workData.RX1 = (LifeTables.FirstOrDefault(x => x.Age == _age + 1).Rx * workData.InterestRate)
+						  / (Math.Log(1 + workData.InterestRate));
+			workData.RX14 = (workData.MemberInfo.Age1by4 - _age) * (workData.RX1 - workData.RX) + workData.RX;
+
+			//Dx
+			workData.DX = LifeTables.FirstOrDefault(x => x.Age == _age).Dx;						 
+			workData.DX1 = LifeTables.FirstOrDefault(x => x.Age == _age + 1).Dx ;
+			workData.DX14 = (workData.MemberInfo.Age1by4 - _age) * (workData.DX1 - workData.DX) + workData.DX;
+
 		}
 
 		public void print(test test) 
@@ -260,6 +352,23 @@ namespace SPLICESCERS.Services
 			}
 		}
 
+
+		public void Option1Computation() 
+		{
+			int currTrail = 0;
+			double presentValue = 0;
+			double annualAmount = 0;
+			double interPolation = 0;
+			double interPlaceHolder = 0;
+
+			do
+			{
+				//Handle Present Value 
+				//presentValue
+
+			} while (currTrail < 20);
+
+		}
 
 	}
 }

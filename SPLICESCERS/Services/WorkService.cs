@@ -32,7 +32,6 @@ namespace SPLICESCERS.Services
                     Console.WriteLine(key + " = " + applicationSettings[key]);
                 }
 
-
                 _workData.TypeOfRetirement = (RetirementType)Enum.Parse(typeof(RetirementType), applicationSettings["RetirementType"]);
 
                 _workData.DateOfRetirement = DateTime.Parse(applicationSettings["DateOfRetirement"]);
@@ -43,8 +42,6 @@ namespace SPLICESCERS.Services
 
                 _workData.EEContrBasic = Convert.ToDouble(applicationSettings["EEContrBasic"]);
                 _workData.EEContrCol = Convert.ToDouble(applicationSettings["EEContrCol"]);
-
-
                 _workData.MoneyPurchase = (YesNo)Enum.Parse(typeof(YesNo), applicationSettings["MoneyPurchase"]);
 
                 _workData.MemberInfo.Name = applicationSettings["MemberName"];
@@ -75,7 +72,8 @@ namespace SPLICESCERS.Services
 
 				_workData.InterestRate = Convert.ToDouble(applicationSettings["InterestRate"]);
 				_workData.COLA = Convert.ToDouble(applicationSettings["COLA"]);			
-
+                _workData.FeqToPay = Convert.ToDouble(applicationSettings["FeqToPay"]);
+                _workData.RoundOption1Fac = Convert.ToDouble(applicationSettings["RoundOption1Fac"]);
 			}
 
         }
@@ -95,7 +93,6 @@ namespace SPLICESCERS.Services
             _workData.TotalNonIS = _workData.NonISDuration + _workData.NonISSickDuration;
 
             _workData.TotalService = _workData.TotalIS + _workData.TotalNonIS;
-
 
 			CalculateERF();
             CalculateServiceBenefit();
