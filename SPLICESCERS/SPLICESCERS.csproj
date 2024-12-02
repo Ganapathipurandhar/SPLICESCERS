@@ -83,7 +83,6 @@
     <Compile Include="Services\AppServices.cs" />
     <Compile Include="Services\DataServices.cs" />
     <Compile Include="Services\FactorService.cs" />
-    <Compile Include="test.cs" />
     <Compile Include="Types\DurationYMDs.cs" />
     <Compile Include="Types\ERF.cs" />
     <Compile Include="Types\DisGAM.cs" />

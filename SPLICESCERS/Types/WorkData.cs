@@ -59,7 +59,7 @@ namespace SPLICESCERS.Types
 		public double COLA { get; set; } //Cost of Living Allowance
 		public double FeqToPay { get; set; } //Factor to convert frequency of payment
 		public double RoundOption1Fac { get; set; }//TODO: rounding factor for option 1 - where do you get this from? right now we use it from config
-
+		public double ContinueOption4 { get; set; }
 		#endregion
 
 		//Computed Values for Work -Sheet

@@ -78,6 +78,5 @@ namespace SPLICESCERS.Types
 		public double Nx1yPrime { get; set; }
 		public double Dx1y1Prime { get; set; }
 		public double Nx1y1Prime { get; set; }
-
 	}
 }

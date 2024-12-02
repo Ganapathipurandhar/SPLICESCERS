@@ -328,31 +328,7 @@ namespace SPLICESCERS.Services
 			workData.DX14 = (workData.MemberInfo.Age1by4 - _age) * (workData.DX1 - workData.DX) + workData.DX;
 			Option1Computation();
 
-		}
-
-		public void print(test test) 
-		{
-			for (int i = 0; i < 116; i++)
-			{
-				test.print(LifeTables[i].Age.ToString() + " : " +
-					//LifeTables[i].qx.ToString() + " : " +
-					//LifeTables[i].lx.ToString() + " : " +
-					//LifeTables[i].vx.ToString() + " : " +
-					//LifeTables[i].Dx.ToString() + " : " +
-					//LifeTables[i].Nx.ToString() + " : " +
-					//LifeTables[i].qy.ToString() + " : " +
-					//LifeTables[i].ly.ToString() + " : " +
-					//LifeTables[i].vy.ToString() + " : " +
-					//LifeTables[i].Dy.ToString() + " : " +
-					//LifeTables[i].Ny.ToString() + " : " +
-					//LifeTables[i].lx1y1.ToString() + " : " +
-					//LifeTables[i].vyPrime.ToString() + " : " +
-					//LifeTables[i].Dx1y1Prime.ToString() + " : " +
-					//LifeTables[i].Nx1y1Prime.ToString()
-					""
-					);
-			}
-		}
+		}	
 
 
 		public void Option1Computation() 
@@ -402,24 +378,20 @@ namespace SPLICESCERS.Services
 
 				diff = Math.Abs(interPolation - interPlaceHolder);
 
-				interPlaceHolder = interPolation;
-				//Handle Present Value 
-				//presentValue
-				Console.WriteLine("*****************************");
-				Console.WriteLine("age : " + age);
-				Console.WriteLine("agex1 : " + agex1);
-				Console.WriteLine("agex14 : " + agex14);
-				Console.WriteLine("diff : " + diff);
-				Console.WriteLine("presentValue : " + presentValue);
-				Console.WriteLine("annualAmount : " + annualAmount);
-				Console.WriteLine("interPolation : " + interPolation);
-				Console.WriteLine("currTrail : " + currTrail);
-				Console.WriteLine("*****************************");
-				
+				interPlaceHolder = interPolation;			
 
 			} ;
-			
 
+			//Option 2
+			workData.Option2 = workData.X14 / (workData.X14 + 1 * (workData.Y14 - workData.XY14));
+
+			//Option 3 : This function never hits in Excel because its looking for spouse in the wrong place
+			workData.Option3 = workData.RelationShip != "Spouse" ?
+				workData.X14 / (workData.X14 + 0.5 * (workData.Y14 - workData.XY14)) : 0.0;//TODO:How to handle N/A condition
+
+			//TODO: We need to set NA value
+			workData.Option4 = workData.ContinueOption4 > 0 ?
+				workData.X14 / (workData.X14 + workData.ContinueOption4 * (workData.Y14 - workData.XY14)) : 0.0;
 
 		}
 
