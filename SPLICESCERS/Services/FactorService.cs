@@ -1,6 +1,7 @@
 ﻿using SPLICESCERS.Types;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -325,6 +326,7 @@ namespace SPLICESCERS.Services
 			workData.DX = LifeTables.FirstOrDefault(x => x.Age == _age).Dx;						 
 			workData.DX1 = LifeTables.FirstOrDefault(x => x.Age == _age + 1).Dx ;
 			workData.DX14 = (workData.MemberInfo.Age1by4 - _age) * (workData.DX1 - workData.DX) + workData.DX;
+			Option1Computation();
 
 		}
 
@@ -355,18 +357,69 @@ namespace SPLICESCERS.Services
 
 		public void Option1Computation() 
 		{
+			double age = Math.Truncate(workData.MemberInfo.Age);
+			double agex1 = 1 + Math.Truncate(workData.MemberInfo.Age);
+			double agex14 = Math.Truncate(workData.MemberInfo.Age1by4);
 			int currTrail = 0;
 			double presentValue = 0;
 			double annualAmount = 0;
 			double interPolation = 0;
 			double interPlaceHolder = 0;
+			double diff = 1;
 
-			do
+
+
+			while (diff > 0.00005 & currTrail < 20)
 			{
+				currTrail++;
+				age = Math.Truncate(workData.MemberInfo.Age + interPlaceHolder) ;
+				agex1 = 1 + Math.Truncate(workData.MemberInfo.Age + interPlaceHolder) ;
+				agex14 = AppServices.Ceiling(workData.MemberInfo.Age1by4 + interPlaceHolder, workData.RoundOption1Fac);
+
+				//MxN
+				workData.MXn = (LifeTables.FirstOrDefault(x => x.Age == age).Mx * workData.InterestRate)
+							  / (Math.Log(1 + workData.InterestRate));
+				workData.MX1n = (LifeTables.FirstOrDefault(x => x.Age == agex1).Mx * workData.InterestRate)
+							  / (Math.Log(1 + workData.InterestRate));
+				workData.MX14n = (agex14 - age) * (workData.MX1n - workData.MXn) + workData.MXn;
+
+				//RxN
+				workData.RXn = (LifeTables.FirstOrDefault(x => x.Age == age).Rx * workData.InterestRate)
+							  / (Math.Log(1 + workData.InterestRate));
+				workData.RX1n = (LifeTables.FirstOrDefault(x => x.Age == agex1).Rx * workData.InterestRate)
+							  / (Math.Log(1 + workData.InterestRate));
+				workData.RX14n = (agex14 - age) * (workData.RX1n - workData.RXn ) + workData.RXn;
+
+				presentValue = workData.X14 + AppServices.Ceiling(interPlaceHolder, workData.RoundOption1Fac) * (workData.MX14 - workData.MX14n) / workData.DX14
+					- (workData.RX14 - workData.RX14n - AppServices.Ceiling(interPlaceHolder, workData.RoundOption1Fac) * workData.MX14n) / workData.DX14;
+
+				annualAmount = (workData.EEContrBasic - workData.EEContrBasic *( workData.MX14-workData.MX14n)/workData.DX14)/
+								(workData.X14 - (workData.RX14 - workData.RX14n - AppServices.Ceiling(interPlaceHolder, workData.RoundOption1Fac) * workData.MX14n)/ workData.DX14);
+
+				interPolation = workData.EEContrBasic / annualAmount;
+
+				workData.Option1 =  workData.X14/ interPolation;
+
+				diff = Math.Abs(interPolation - interPlaceHolder);
+
+				interPlaceHolder = interPolation;
 				//Handle Present Value 
 				//presentValue
+				Console.WriteLine("*****************************");
+				Console.WriteLine("age : " + age);
+				Console.WriteLine("agex1 : " + agex1);
+				Console.WriteLine("agex14 : " + agex14);
+				Console.WriteLine("diff : " + diff);
+				Console.WriteLine("presentValue : " + presentValue);
+				Console.WriteLine("annualAmount : " + annualAmount);
+				Console.WriteLine("interPolation : " + interPolation);
+				Console.WriteLine("currTrail : " + currTrail);
+				Console.WriteLine("*****************************");
+				
 
-			} while (currTrail < 20);
+			} ;
+			
+
 
 		}
 

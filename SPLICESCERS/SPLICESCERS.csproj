@@ -80,6 +80,7 @@
     <Compile Include="ListExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AppServices.cs" />
     <Compile Include="Services\DataServices.cs" />
     <Compile Include="Services\FactorService.cs" />
     <Compile Include="test.cs" />
