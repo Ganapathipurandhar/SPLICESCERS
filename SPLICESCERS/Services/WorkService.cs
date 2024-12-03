@@ -175,7 +175,9 @@ namespace SPLICESCERS.Services
                     //TODO - Set Everything to N/A or how to handle NA
 					//_workData.Benefit90Perc =
 					//_workData.FAS1by3 =
-				}				
+				}
+
+
 				
 				//MAXA(MINA(B43, B42), B35, B41))
 				double[] maxlist = { Math.Min(_workData.FAS1by3, _workData.ServiceProjected),
@@ -183,7 +185,13 @@ namespace SPLICESCERS.Services
                 _workData.NSCDFraction = maxlist.Max();
 			}
 
-            //Life Table Computation Age Options
+            //Calculate SCD (Service connected Disability)
+            if (_workData.TypeOfRetirement == RetirementType.SCD) 
+            {
+                _workData.SCD1by2FAS = Math.Round(_workData.FinalComp/2,2);
+            }
+
+			//Life Table Computation Age Options
 			_workData.XMinusY = (int)(Math.Truncate(_workData.MemberInfo.Age) - Math.Truncate(_workData.BeneficiaryInfo.Age));
 			_workData.XMinusYPlus1 = (int)(Math.Truncate(_workData.MemberInfo.Age) - (Math.Truncate(_workData.BeneficiaryInfo.Age)+1));
             _workData.XPlus1MinusY = (int)((Math.Truncate(_workData.MemberInfo.Age)+1) - Math.Truncate(_workData.BeneficiaryInfo.Age));
