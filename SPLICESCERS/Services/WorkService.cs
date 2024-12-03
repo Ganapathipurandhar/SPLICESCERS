@@ -74,6 +74,10 @@ namespace SPLICESCERS.Services
 				_workData.COLA = Convert.ToDouble(applicationSettings["COLA"]);			
                 _workData.FeqToPay = Convert.ToDouble(applicationSettings["FeqToPay"]);
                 _workData.RoundOption1Fac = Convert.ToDouble(applicationSettings["RoundOption1Fac"]);
+				_workData.ContinueOption4 = Convert.ToDouble(applicationSettings["ContinueOption4"]);
+
+
+				
 			}
 
         }

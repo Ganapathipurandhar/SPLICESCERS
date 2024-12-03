@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
-namespace SPLICESCERS.Types
+﻿namespace SPLICESCERS.Types
 {
 	/// <summary>
 	/// 1994 Group Annuity Mortality Table (also known as the UP-94 Mortality Table) for males

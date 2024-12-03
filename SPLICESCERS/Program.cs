@@ -6,24 +6,23 @@ namespace SPLICESCERS
 	internal class Program
 	{
 		static void Main(string[] args)
-		{
-			var _test = new test();
+		{			
 			DataServices.LoadERF();
 
-			//_test.printName("Load Memeber information from App.Config to WorkData ");
-			_test.print("*******************************************************");
-			_test.print("Load Memeber information from App.Config to WorkData ");
-			_test.print("*******************************************************");
+			//AppServices.printName("Load Memeber information from App.Config to WorkData ");
+			AppServices.print("*******************************************************");
+			AppServices.print("Load Memeber information from App.Config to WorkData ");
+			AppServices.print("*******************************************************");
 
 			WorkService workService = new WorkService();
             workService.LoadData();
-			_test.print("****************************************************************");
-			_test.print("Compute worksheet based on input and according to cell equation");
-			_test.print("*****************************************************************");
+			AppServices.print("****************************************************************");
+			AppServices.print("Compute worksheet based on input and according to cell equation");
+			AppServices.print("*****************************************************************");
 			workService.ComputeWorkSheet();
-			_test.print("****************************************************************");
-			_test.print("Compute Factors based on input and according to cell equation");
-			_test.print("*****************************************************************");
+			AppServices.print("****************************************************************");
+			AppServices.print("Compute Factors based on input and according to cell equation");
+			AppServices.print("*****************************************************************");
 			FactorService fs = new FactorService(workService);
 			fs.CalcLifeTable();
 			workService.PrintProperty(workService.WD);
