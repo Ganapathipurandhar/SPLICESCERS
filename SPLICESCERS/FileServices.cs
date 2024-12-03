@@ -16,9 +16,15 @@ namespace SPLICESCERS
             return JsonSerializer.Deserialize<List<T>>(text);
         }
 
-        public static string ListToJson<T>(List<T> list)
+        public static void ListToJson<T>(List<T> list, string destPath=@"./JsonData.json")
         {
-            return JsonSerializer.Serialize(list); 
+            string  convertedJson = JsonSerializer.Serialize(list);
+
+            using (StreamWriter writer = new StreamWriter(destPath))
+            {
+                writer.Write(convertedJson);
+            }
+
         }
 
         public static void ListToCsv<T>(List<T> list, string destPath=@"./Data.csv")
