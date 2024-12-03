@@ -1,4 +1,12 @@
-* Integrated Service Computation divides Days by 261 which is the number of working days in a year. However the condition to check for Retirement Type = SR does nothing
+* Work!B20: Integrated Service Computation divides Days by 261 which is the number of working days in a year. However the condition to check for Retirement Type = SR does nothing
+* Factor!B17: References B10 which at this point looks like its empty and the condition will alway be false
+* Factor!K2 : Where is the rounding factor from, we couldn't find any reference to this. Can this change or is it static or will it depend on any other factor
+* SSMod!: Is not referenced in any other part of the excel, where exactly is it used?
+
+*Factor! ETx and ETy uses 0.5 multiplier (there is not expanition for this). Will it change and should we pass as refrence value
+*Factor!K1 : "factor to convert frequency of payment" is also 0.5 and
+*Factor!B10 : "Continuance Under Option 4" is also 0.5 are all of the above related or will they change on their own
 
 * I couldn't find 1981 General Disability Mortality Table
 * GAM94 and GAF94 don't match the SOA table in the excel after age 115
+*
