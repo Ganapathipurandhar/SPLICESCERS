@@ -37,6 +37,16 @@ namespace SPLICESCERS
             }
         }
 
+        public static void ObjectToJson<T>(T data, string destPath=@"./ObjectData.json")
+        {
+            string convertedJson = JsonSerializer.Serialize(data);
+
+            using (StreamWriter writer = new StreamWriter(destPath))
+            {
+                writer.Write(convertedJson);
+            }
+        }
+
     }
 
 }
