@@ -328,6 +328,7 @@ namespace SPLICESCERS.Services
 			workData.DX14 = (workData.MemberInfo.Age1by4 - _age) * (workData.DX1 - workData.DX) + workData.DX;
 			Option1Computation();
 
+			FileServices.ObjectToJson(workData);
 		}	
 
 
