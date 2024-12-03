@@ -328,6 +328,7 @@ namespace SPLICESCERS.Services
 			workData.DX14 = (workData.MemberInfo.Age1by4 - _age) * (workData.DX1 - workData.DX) + workData.DX;
 			Option1Computation();
 
+
 		}	
 
 
@@ -392,6 +393,14 @@ namespace SPLICESCERS.Services
 			//TODO: We need to set NA value
 			workData.Option4 = workData.ContinueOption4 > 0 ?
 				workData.X14 / (workData.X14 + workData.ContinueOption4 * (workData.Y14 - workData.XY14)) : 0.0;
+
+
+			//Calc Computation
+			//workData.MonthlyBenefits = if (workData.TypeOfRetirement == RetirementType.SCD) 
+			//{
+			//	return Math.Max(workData.ServiceRetirementBenefits, workData.SCD1by2FAS);
+			//}
+			
 
 		}
 

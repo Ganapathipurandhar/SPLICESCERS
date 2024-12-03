@@ -9,4 +9,4 @@
 
 * I couldn't find 1981 General Disability Mortality Table
 * GAM94 and GAF94 don't match the SOA table in the excel after age 115
-*
+*Z142 I think computation is incorrect

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -87,6 +88,7 @@ namespace SPLICESCERS.Types
 		public double ServiceProjected { get; set; }
 		public DateTime ServiceProjAge65 { get; set; }
 		public double SerRetDiff { get; set; }//ServiceProjAge65 and DateOfRetirement difference
+		public double SCD1by2FAS { get; set; }
 
 		//Mortality Table
 		//TODO
@@ -167,6 +169,9 @@ namespace SPLICESCERS.Types
 		public double Option2 { get; set; }
 		public double Option3 { get; set; }
 		public double Option4 { get; set; }
+
+		//Calc Sheet Values Not availabe on other sheets
+		public double MonthlyBenefits { get; set; } 
 
 
 
