@@ -8,7 +8,7 @@ namespace SCERS_RAP.Type
 {
 	public class RPAWork
 	{
-		public PreLoad PreLoad { get; set; }
+		//public PreLoad PreLoad { get; set; }
 
 		//Computed Values for Work -Sheet
 		public double ISDuration { get; set; }

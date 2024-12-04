@@ -18,19 +18,10 @@ namespace SCERS_RAP
 			//On Application Start
 			//Load Static Data
 			DataServices.LoadStaticData();//var test = DataServices.GetValue<ERF, double>(DataServices.ERF31676_10, "AgeAtRetirement", 61, "Fraction");
-			
+			//Run RPA Service in sequence of Data needs
 			RAPService RAP = new RAPService();
 			RAP.Run();
-
-
-			//Get Member PreLoad Information
-			//Compute Basic from PreLoad
-			//Compute LifeTable
-			//Compute Factor From Life Table
-			// Compute Cal
-			// Compute Letter
 			Console.ReadKey();
-
 		}
 	}
 }

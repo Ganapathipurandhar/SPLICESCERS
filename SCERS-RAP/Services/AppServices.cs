@@ -94,7 +94,7 @@ namespace SCERS_RAP.Services
 			return appConfigValue;
 		}
 
-		public void PrintProperty(object t)
+		public static void PrintProperty(object t)
 		{
 			foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(t))
 			{
@@ -108,6 +108,11 @@ namespace SCERS_RAP.Services
 				else
 				{ PrintProperty(value); }
 			}
+		}
+
+		public static void Print(string stringValue)
+		{
+			Console.WriteLine(stringValue);
 		}
 	}
 }

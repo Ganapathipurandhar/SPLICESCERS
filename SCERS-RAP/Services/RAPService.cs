@@ -16,16 +16,33 @@ namespace SCERS_RAP.Services
 
 		public RAPService() 
 		{
+			RPAData = new RPAData();
+			//RPAData.PreLoad = new PreLoad();
 		}
 
 		public void Run() 
 		{
 			RPAData.PreLoad = AppServices.JsonToObject<PreLoad>(@".\Data\PreLoad.json");			
 			postPreLoad();
+			AppServices.Print("******************************************************");
+			AppServices.Print("Pre Load Data");
+			AppServices.Print("******************************************************");
+			AppServices.PrintProperty(RPAData.PreLoad);
 			ws = new WorkService(RPAData);
 			ws.CalculateWork();
+			AppServices.Print("******************************************************");
+			AppServices.Print("Work Sheet Data");
+			AppServices.Print("******************************************************");
+			AppServices.PrintProperty(RPAData.Work);
 			fs = new FactorService(RPAData);
 			fs.CalculateFactor();
+			//Save Life Table to CSV File
+			AppServices.ListToCsv(RPAData.LifeTables, @"./Data.csv");
+			AppServices.Print("******************************************************");
+			AppServices.Print("Factor Data");
+			AppServices.Print("******************************************************");
+			AppServices.PrintProperty(RPAData.Factor);
+
 		}
 
 		private void postPreLoad() 
