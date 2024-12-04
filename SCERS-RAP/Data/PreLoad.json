@@ -1,0 +1,44 @@
+{
+  "TypeOfRetirement": "SR",
+  "DateOfRetirement": "2002-10-16T00:00:00",
+  "Membership": "General",
+  "Tier": "Three",
+  "MoneyPurchase": "No",
+  "MemberInfo": {
+    "Name": "George Jefferson",
+    "DOB": "1941-07-27T00:00:00"
+  },
+  "BeneficiaryInfo": {
+    "Name": "Deborah Jefferson",
+    "DOB": "1949-05-23T00:00:00"
+  },
+  "RelationShip": "Spouse",
+  "IntegratedService": {
+    "Years": 29,
+    "Months": 8,
+    "Days": 16.4999
+  },
+  "ISSick": {
+    "Years": 1,
+    "Months": 0,
+    "Days": 11.4124
+  },
+  "NonIntegratedService": {
+    "Years": 0,
+    "Months": 0,
+    "Days": 0
+  },
+  "NonISSick": {
+    "Years": 0,
+    "Months": 0,
+    "Days": 0
+  },
+  "EEContrBasic": 58106.4,
+  "EEContrCol": 6629.87,
+  "FinalComp": 4803.45,
+  "InterestRate": 0.08,
+  "COLA": 0.02,
+  "FeqToPay": 0.5,
+  "RoundOption1Fac": 0.002739726,
+  "ContinueOption4": 0.5
+}

@@ -396,12 +396,12 @@ namespace SPLICESCERS.Services
 
 
 			//Calc Computation
-			//workData.MonthlyBenefits = if (workData.TypeOfRetirement == RetirementType.SCD) 
-			//{
-			//	return Math.Max(workData.ServiceRetirementBenefits, workData.SCD1by2FAS);
-			//}
-			
+			workData.MonthlyBenefits =  (workData.TypeOfRetirement == RetirementType.SCD) ? Math.Max(workData.ServiceRetirementBenefits, workData.SCD1by2FAS) 
+										: (workData.MoneyPurchase == YesNo.Yes)? workData.MoneyPurchaseCalc 
+										: (workData.TypeOfRetirement == RetirementType.NSCD)? workData.NSCDFraction : workData.ServiceRetirementBenefits;
 
+			FileServices.ObjectToJson(workData);
+			
 		}
 
 	}

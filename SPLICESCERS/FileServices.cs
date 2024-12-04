@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace SPLICESCERS
 {
-    public static class FileServices
+	public static class FileServices
     {
         public static List<T> ReadJson<T>(string filePath)
         {
