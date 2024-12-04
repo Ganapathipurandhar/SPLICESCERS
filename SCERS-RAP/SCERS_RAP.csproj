@@ -78,12 +78,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppServices.cs" />
+    <Compile Include="Services\CalcService.cs" />
     <Compile Include="Services\DataServices.cs" />
     <Compile Include="Services\FactorService.cs" />
     <Compile Include="Services\LifeTableService.cs" />
     <Compile Include="Services\ListExtensions.cs" />
     <Compile Include="Services\RAPService.cs" />
     <Compile Include="Services\WorkService.cs" />
+    <Compile Include="Type\Calc.cs" />
     <Compile Include="Type\DisGAM.cs" />
     <Compile Include="Type\DurationYMDs.cs" />
     <Compile Include="Type\ERF.cs" />

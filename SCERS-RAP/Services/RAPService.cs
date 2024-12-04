@@ -16,8 +16,7 @@ namespace SCERS_RAP.Services
 
 		public RAPService() 
 		{
-			RPAData = new RPAData();
-			//RPAData.PreLoad = new PreLoad();
+			RPAData = new RPAData();			
 		}
 
 		public void Run() 
