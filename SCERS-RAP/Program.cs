@@ -31,7 +31,11 @@ namespace SCERS_RAP
 			TimeSpan elapsedTime = stopwatch.Elapsed;
 			Console.WriteLine($"Program execution time: {elapsedTime.TotalSeconds} seconds");
 
-			Console.ReadKey();
+			HTMLService htmlService = new HTMLService();
+			htmlService.findAndReplace("DateOfRetirement", "2002-10-16T00:00:00");
+			htmlService.BuildOutputFile();
+            
+            Console.ReadKey();
 		}
 	}
 }
