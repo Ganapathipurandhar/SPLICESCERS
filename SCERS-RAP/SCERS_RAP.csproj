@@ -82,6 +82,7 @@
     <Compile Include="Services\CalcService.cs" />
     <Compile Include="Services\DataServices.cs" />
     <Compile Include="Services\FactorService.cs" />
+    <Compile Include="Services\LetterService.cs" />
     <Compile Include="Services\LifeTableService.cs" />
     <Compile Include="Services\ListExtensions.cs" />
     <Compile Include="Services\RAPService.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Type\ERF.cs" />
     <Compile Include="Type\Factor.cs" />
     <Compile Include="Type\GAM.cs" />
+    <Compile Include="Type\Letter.cs" />
     <Compile Include="Type\LifeTable.cs" />
     <Compile Include="Type\PersonInfo.cs" />
     <Compile Include="Type\PreLoad.cs" />

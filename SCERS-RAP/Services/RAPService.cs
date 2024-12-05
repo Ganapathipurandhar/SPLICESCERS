@@ -14,6 +14,7 @@ namespace SCERS_RAP.Services
 		private WorkService ws;
 		private FactorService fs;
 		private CalcService cs;
+		private LetterService l;
 
 		public RAPService() 
 		{
@@ -48,6 +49,12 @@ namespace SCERS_RAP.Services
 			cs = new CalcService(RPAData);
 			cs.ComputeCalc();
 			AppServices.PrintProperty(RPAData.Calc);
+			AppServices.Print("******************************************************");
+			AppServices.Print("Letter Data");
+			AppServices.Print("******************************************************");
+			l = new LetterService(RPAData);
+			l.BuildLetterData();
+			AppServices.PrintProperty(RPAData.Letter);
 		}
 
 		private void postPreLoad() 

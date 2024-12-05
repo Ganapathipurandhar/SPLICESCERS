@@ -13,5 +13,6 @@ namespace SCERS_RAP.Type
 		public Factor Factor { get; set; }
 		public List<LifeTable> LifeTables { get; set; }
 		public Calc Calc { get; set; }
+		public Letter Letter { get; set; }
 	}
 }

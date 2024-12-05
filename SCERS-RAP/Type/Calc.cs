@@ -14,6 +14,10 @@ namespace SCERS_RAP.Type
 		public double AnnuityBenefit { get; set; }
 		public double PensionReserve { get; set; }
 		public double PensionBenefit { get; set; }
+
+		public double BasicSpouse { get; set; }
+		
+
 		public double CtB { get;set; }//Continuance To Beneficiary 
 		public double OP1AnnuityBenefit { get; set; }//Option 1 Annuity Benefit
 		public double OP1PensionBenefit { get; set; }//Option 1 Pension Benefit
@@ -31,6 +35,9 @@ namespace SCERS_RAP.Type
 		public double OP3Total { get; set; } //Option 3 Total
 		public double OP3CtB { get; set; }
 
+		public double COLSpouse { get; set; }
+		public double COLTotal{ get; set; }
+		public double COLCSP { get; set; }
 	}
 
 }

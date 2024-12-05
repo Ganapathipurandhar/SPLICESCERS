@@ -64,6 +64,16 @@ namespace SCERS_RAP.Services
 			calc.OP3Total = calc.OP3PensionBenefit + calc.OP3AnnuityBenefit;
 			calc.OP3CtB = calc.OP3Total/2;
 
+			//ROUND(G20 * 12 * (0.6 * (Calc!C18 - Calc!C19)),2)," ")
+			calc.BasicSpouse = pl.RelationShip == RelationShip.Spouse ? 
+							(calc.MonthlyBenefits * 12 *(0.6 *(f.Y14 - f.XY14))) : 0;
+
+			//= IF(LOWER(Work!F$11) = "spouse", ROUND(G20 * 12 * (0.6 * (Work!E56 - Work!E57)),2)-M28," ")
+			calc.COLSpouse = pl.RelationShip == RelationShip.Spouse ?
+							(calc.MonthlyBenefits * 12 * (0.6 * (f.Y14Prime - f.XY14Prime))) - calc.BasicSpouse : 0;
+			//=ROUND((G20*Work!$E55*12)-G28,2)
+			calc.COLTotal = (calc.MonthlyBenefits * f.X14Prime * 12) - calc.Total;
+			calc.COLCSP = calc.COLTotal - pl.EEContrCol;
 		}
 
 	}
