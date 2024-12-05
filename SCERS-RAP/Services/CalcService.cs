@@ -33,7 +33,36 @@ namespace SCERS_RAP.Services
 			calc.MonthlyBenefits = (pl.TypeOfRetirement == RetirementType.SCD) ? Math.Max(work.ServiceRetirementBenefits, work.SCD1by2FAS)
 										: (pl.MoneyPurchase == YesNo.Yes) ? work.MoneyPurchaseCalc
 										: (pl.TypeOfRetirement == RetirementType.NSCD) ? work.NSCDFraction : work.ServiceRetirementBenefits;
-			
+
+			calc.AnnuityFactor = f.X14 * 12;
+			//TODO: Rounding increases the compensation value by 67 cents
+			calc.Total = pl.MoneyPurchase == YesNo.Yes ? pl.EEContrBasic * 2 :
+							Math.Round(calc.MonthlyBenefits * calc.AnnuityFactor, 2);
+
+			calc.AnnuityBenefit = pl.EEContrBasic / calc.AnnuityFactor;
+			calc.PensionReserve = Math.Round(calc.Total - pl.EEContrBasic,2);
+			calc.PensionBenefit = calc.MonthlyBenefits - calc.AnnuityBenefit;
+			//TODO: Is 0.6 a standard multiplier or should be passed as pre-load
+			calc.CtB = Math.Round(calc.MonthlyBenefits * 0.6, 2);
+			calc.OP1AnnuityBenefit = Math.Round(calc.AnnuityBenefit * f.Option1, 2);
+			calc.OP1PensionBenefit = calc.PensionBenefit;
+			calc.OP1Total = calc.OP1AnnuityBenefit + calc.OP1PensionBenefit;
+			;
+
+			//Option 2 - 100% Continuance
+			calc.OP2AnnuityFactor = (f.X14 +  f.Y14 - f.XY14) * 12;
+			calc.OP2AnnuityBenefit = pl.EEContrBasic / calc.OP2AnnuityFactor;
+			calc.OP2PensionBenefit = calc.PensionReserve/ calc.OP2AnnuityFactor;
+			calc.OP2Total = calc.OP2PensionBenefit + calc.OP2AnnuityBenefit;
+			calc.OP2CtB = calc.OP2Total;
+
+			//Option 3
+			calc.OP3AnnuityFactor = (f.X14 +  0.5 *(f.Y14 - f.XY14)) * 12;
+			//TOD
+			calc.OP3AnnuityBenefit = pl.EEContrBasic / calc.OP3AnnuityFactor;
+			calc.OP3PensionBenefit = calc.PensionReserve / calc.OP3AnnuityFactor;
+			calc.OP3Total = calc.OP3PensionBenefit + calc.OP3AnnuityBenefit;
+			calc.OP3CtB = calc.OP3Total/2;
 
 		}
 

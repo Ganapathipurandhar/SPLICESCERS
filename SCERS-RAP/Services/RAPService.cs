@@ -13,6 +13,7 @@ namespace SCERS_RAP.Services
 		private PreLoad pl;
 		private WorkService ws;
 		private FactorService fs;
+		private CalcService cs;
 
 		public RAPService() 
 		{
@@ -41,7 +42,12 @@ namespace SCERS_RAP.Services
 			AppServices.Print("Factor Data");
 			AppServices.Print("******************************************************");
 			AppServices.PrintProperty(RPAData.Factor);
-
+			AppServices.Print("******************************************************");
+			AppServices.Print("Calc Data");
+			AppServices.Print("******************************************************");
+			cs = new CalcService(RPAData);
+			cs.ComputeCalc();
+			AppServices.PrintProperty(RPAData.Calc);
 		}
 
 		private void postPreLoad() 
