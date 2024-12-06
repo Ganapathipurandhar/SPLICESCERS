@@ -35,15 +35,15 @@ namespace SCERS_RAP.Services
 		
 			letter.Membership = pl.Membership.ToString();
 			letter.Tier =((int)pl.Tier).ToString();
-			letter.RetirementDate = pl.DateOfRetirement.ToString("MMDDYYYY");
-			letter.MemberDOB = pl.MemberInfo.DOB.ToString("MMDDYYYY");
+			letter.RetirementDate = pl.DateOfRetirement.ToString("d");
+			letter.MemberDOB = pl.MemberInfo.DOB.ToString("d");
 			letter.Integrated = work.TotalIS.ToString("0.##");
 			letter.NonIntegrated = work.TotalNonIS.ToString("0.##");
 			letter.AvgMonthlyComp = pl.FinalComp.ToString("0.##");
 
 			letter.BeneficiaryName = pl.BeneficiaryInfo.Name;
 			letter.RelationShip = pl.RelationShip.ToString();
-			letter.BeneficiaryDOB = pl.BeneficiaryInfo.DOB.ToString("MMDDYYYY");
+			letter.BeneficiaryDOB = pl.BeneficiaryInfo.DOB.ToString("d");
 
 			letter.UnmodifiedCSA = calc.AnnuityBenefit.ToString("0.##");
 			letter.UnmodifiedCSP = calc.PensionBenefit.ToString("0.##");
