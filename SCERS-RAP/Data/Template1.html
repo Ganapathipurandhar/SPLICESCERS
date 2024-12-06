@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<style>
+  .maintable th {
+    background: #BFBFBF;
+    border: 1px solid black;
+  }
+
+  .maintable td {
+    border: 1px solid black;
+    vertical-align: top;
+  }
+
+  .maintable {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 800px;
+  }
+
+  .subtable {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .subtable td {
+    border: none;
+  }
+
+  .subtable th {
+    background: none;
+    border: none;
+    width: 140px;
+  }
+
+  .left-text {
+    float: left;
+    margin-left: 5px;
+  }
+
+  .righ-text {
+    float: right;
+    padding-right: 15px;
+  }
+
+  .letterhead {
+    text-align: center;
+    width: 800px;
+    font-family: sans-serif;
+    font-size: large;
+  }
+</style>
+
+<body>
+
+  <div class="letterhead">
+    <span><b>SACRAMENTO COUNTY EMPLOYEES' RETIREMENT SYSTEM</b></span><br>
+    <span>Service Retirement For</span><br>
+    <span>[MemberName]</span>
+  </div>
+
+  <table class="maintable">
+    <tr>
+      <th>Member Information</th>
+      <th>Beneficiary Information</th>
+    </tr>
+
+    <tr>
+      <td>
+        <table class="subtable" style="width:100%">
+          <tr>
+            <td>MemberShip:</td>
+            <td>[MemberShip]</td>
+          </tr>
+          <tr>
+            <td>Tier:</td>
+            <td>[Tier]</td>
+          </tr>
+          <tr>
+            <td>Tier:</td>
+            <td>[Tier]</td>
+          </tr>
+          <tr>
+            <td>Retirement Date:</td>
+            <td>[RetirementDate]</td>
+          </tr>
+          <tr>
+            <td>Date of Birth:</td>
+            <td>[MemberDOB]</td>
+          </tr>
+          <tr>
+            <td>Service:</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td> Integrated</td>
+            <td>[Integrated]</td>
+          </tr>
+          <tr>
+            <td> Non-Integrated</td>
+            <td>[NonIntegrated]</td>
+          </tr>
+          <tr>
+            <td>Avg Monthly Comp:</td>
+            <td>[AvgMonthlyComp]</td>
+          </tr>
+        </table>
+      </td>
+      <td>
+        <table class="subtable">
+          <tr>
+            <td>Beneficiary:</td>
+            <td>[BeneficiaryName]</td>
+          </tr>
+          <tr>
+            <td>Relationship:</td>
+            <td>[RelationShip]</td>
+          </tr>
+          <tr>
+            <td>Date of Birth:</td>
+            <td>[BeneficiaryDOB]</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!-- Monthly Benefits -->
+  <table class="maintable">
+    <tr>
+      <th> MONTHLY BENEFITS</th>
+    </tr>
+    <tr>
+      <td>
+        <table class="subtable" style="width: 800px;">
+          <tr>
+            <th></th>
+
+            <th> Current Service Annuity</th>
+
+            <th>Current Service Pension</th>
+
+            <th> Total Pension</th>
+
+            <th> Continuance to Spouse</th>
+          </tr>
+          <tr>
+            <td style="width: 140px;"><span style="float: left;">Unmodified</span></td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[UnmodifiedCSA]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[UnmodifiedCSP]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[UnmodifiedTP]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[UnmodifiedCTS]</span>
+            </td>
+          </tr>
+          	
+          <tr>
+            <td style="width: 140px;"><span style="float: left;">Option 1</span></td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[Option1CSA]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[Option1CSP]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[Option1TP]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;"></span>
+              <span style="float: right; margin-right: 5px;">[Option1CTS]</span>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="width: 140px;"><span style="float: left;">Option 2</span></td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[Option2CSA]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[Option2CSP]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[Option2TP]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;"></span>
+              <span style="float: right; margin-right: 5px;">[Option2CTS]</span>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 140px;"><span style="float: left;">Option 3</span></td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[Option3CSA]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[Option3CSP]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[Option3TP]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;"></span>
+              <span style="float: right; margin-right: 5px;">[Option3CTS]</span>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!--RESERVES-->
+  <table class="maintable">
+    <tr>
+      <th> </th>
+    </tr>
+    <tr>
+      <td>
+        <table class="subtable" style="width: 800px;">
+          <tr>
+            <th></th>
+
+            <th> Current Service Annuity</th>
+
+            <th>Current Service Pension</th>
+
+            <th> Total Pension</th>
+
+            <th> Continuance to Spouse</th>
+          </tr>
+          <tr>            
+            <td style="width: 140px;"><span style="float: left;">Basic</span></td>
+            <td style="width: 140px;">
+              <span style="float: left;" style="float: left;" >$</span>
+              <span style="float: right; margin-right: 5px;" >[BasicCSA]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[BasicCSP]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[BasicTP]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[BasicCTS]</span>
+            </td>
+          </tr>
+        
+          <tr>
+            <td style="width: 140px;"><span style="float: left;">C O L</span></td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[COLCSA]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[COLCSP]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[COLTP]</span>
+            </td>
+            <td style="width: 140px;">
+              <span style="float: left;">$</span>
+              <span style="float: right; margin-right: 5px;">[COLCTS]</span>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+ <!--NOTES-->
+ <table class="maintable">
+  <tr>
+    <th> NOTES</th>
+  </tr>
+  <tr>
+    <td>
+      <table class="subtable" style="width: 800px;">
+        <tr>
+          <th></th>
+
+          <th> * Only if unmodified</th>
+          
+        </tr>
+       
+       
+      </table>
+    </td>
+  </tr>
+</table>
+
+</body>
+
+</html>

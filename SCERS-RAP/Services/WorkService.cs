@@ -43,7 +43,6 @@ namespace SCERS_RAP.Services
 			work.NonISDuration = yearInDecimal(pl.NonIntegratedService);
 			work.NonISSickDuration = yearInDecimal(pl.NonISSick);
 			work.TotalNonIS = work.NonISDuration + work.NonISSickDuration;
-
 			work.TotalService = work.TotalIS + work.TotalNonIS;
 		}
 

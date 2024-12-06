@@ -54,6 +54,7 @@ namespace SCERS_RAP.Services
 			AppServices.Print("******************************************************");
 			l = new LetterService(RPAData);
 			l.BuildLetterData();
+			l.PrintLetter(RPAData.Letter, @".\Data\Template.html");
 			AppServices.PrintProperty(RPAData.Letter);
 		}
 

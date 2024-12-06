@@ -11,6 +11,7 @@ namespace SCERS_RAP.Type
 	public class Letter
 	{
 		public string MemberName{ get; set; }
+		public string Tier{ get; set; }
 		public string Membership{ get; set; }
 		public string RetirementDate { get; set; }
 		public string MemberDOB { get; set; }

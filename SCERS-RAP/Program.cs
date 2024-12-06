@@ -22,7 +22,7 @@ namespace SCERS_RAP
 			//On Application Start
 			//Load Static Data
 			DataServices.LoadStaticData();//var test = DataServices.GetValue<ERF, double>(DataServices.ERF31676_10, "AgeAtRetirement", 61, "Fraction");
-										  //Run RPA Service in sequence of Data needs
+			//Run RPA Service in sequence of Data needs
 			//stopwatch.Start();
 			RAPService RAP = new RAPService();
 			RAP.Run();

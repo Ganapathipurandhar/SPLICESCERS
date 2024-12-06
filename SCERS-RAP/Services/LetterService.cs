@@ -1,6 +1,8 @@
 ﻿using SCERS_RAP.Type;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +32,9 @@ namespace SCERS_RAP.Services
 		public void BuildLetterData() 
 		{
 			letter.MemberName  = pl.MemberInfo.Name;
+		
 			letter.Membership = pl.Membership.ToString();
+			letter.Tier =((int)pl.Tier).ToString();
 			letter.RetirementDate = pl.DateOfRetirement.ToString("MMDDYYYY");
 			letter.MemberDOB = pl.MemberInfo.DOB.ToString("MMDDYYYY");
 			letter.Integrated = work.TotalIS.ToString("0.##");
@@ -71,6 +75,33 @@ namespace SCERS_RAP.Services
 			letter.COLCSP = calc.COLCSP.ToString("0.##");
 			letter.COLTP = calc.COLTotal.ToString("0.##");
 			letter.COLCTS = calc.COLSpouse.ToString("0.##");
+		}
+
+		public void PrintLetter(object t, string templatePath) 
+		{
+			//Load HTML Files @".\Data\PreLoad.json"
+			string  temp = File.ReadAllText(templatePath);
+			string placeholder ="";
+			foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(t))
+			{
+				string name = "["+descriptor.Name+"]";
+				object value = descriptor.GetValue(t);
+				if (temp.Contains(name))
+				{
+					placeholder = temp.Replace(name, value.ToString());
+				}
+				temp = placeholder;
+			}
+
+			string outputFilepath = @"./Output1.html";
+			if (!string.IsNullOrEmpty(temp))
+			{
+				using (StreamWriter writer = new StreamWriter(outputFilepath))
+				{
+					writer.WriteLine(temp);
+				}
+			}
+
 		}
 	}
 }
