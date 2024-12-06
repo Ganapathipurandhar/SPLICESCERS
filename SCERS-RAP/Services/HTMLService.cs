@@ -48,12 +48,12 @@ namespace SCERS_RAP.Services
                 {
                     var newDataString = templateData.Replace("[" + property.Name + "]", Convert.ToString(property.GetValue(obj)));
                     templateData = newDataString;
-
-                    using (StreamWriter writer = new StreamWriter(@"./Output.html"))
-                    {
-                        writer.WriteLine(templateData);
-                    }
                 }
+            }
+
+            using (StreamWriter writer = new StreamWriter(@"./Output.html"))
+            {
+                writer.WriteLine(templateData);
             }
         }
     }
