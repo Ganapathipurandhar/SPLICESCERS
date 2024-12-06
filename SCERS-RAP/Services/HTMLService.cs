@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,6 +34,25 @@ namespace SCERS_RAP.Services
                 using (StreamWriter writer = new StreamWriter(outputFilepath))
                 {
                     writer.WriteLine(templateFileData);
+                }
+            }
+        }
+
+        public static void ReplaceFromObject<T>(T obj, string templateFilepath = @"./HTMLTemplate.html")
+        {
+            string templateData = File.ReadAllText(templateFilepath);
+
+            foreach (PropertyInfo property in typeof(T).GetProperties()) 
+            {
+                if (templateData.Contains("[" + property.Name + "]"))
+                {
+                    var newDataString = templateData.Replace("[" + property.Name + "]", Convert.ToString(property.GetValue(obj)));
+                    templateData = newDataString;
+
+                    using (StreamWriter writer = new StreamWriter(@"./Output.html"))
+                    {
+                        writer.WriteLine(templateData);
+                    }
                 }
             }
         }
