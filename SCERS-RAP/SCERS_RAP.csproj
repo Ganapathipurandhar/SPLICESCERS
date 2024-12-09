@@ -155,7 +155,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
-    <None Include="SCERS_RAP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\Template.html">
