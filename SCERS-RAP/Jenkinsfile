@@ -1,0 +1,114 @@
+def COLOR_MAP = [
+    'SUCCESS': 'good', 
+    'FAILURE': 'danger',
+]
+pipeline {
+    agent any
+
+    tools {
+        msbuild 'MSBUILD'
+    }
+
+    environment {
+        DOTNET_ROOT = 'C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP/MSBuild/Current/Bin' // Adjust if using different Visual Studio version
+        PATH = "$DOTNET_ROOT:$PATH"
+        AWS_BUCKET = 'splicescers'
+        AWS_TARGET_FOLDER = 'SCERS-RAP/artifacts'
+        s3Bucket = "splicescers"
+        s3Region = "us-east-1"
+        s3TargetFolder = "SCERS-RAP/artifacts"
+        s3FileName = "SCERS-RAP-archive_${env.BUILD_NUMBER}.zip"
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo "Building the project"
+                
+                // Using 'dir' to change the working directory for build
+                dir('C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP') {
+                    bat 'dotnet build SCERS-RAP.sln --configuration Release'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Testing the project"
+                bat 'dotnet test C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP/SCERS_RAP.csproj --configuration Release'
+            }   
+        }
+
+        stage('Archive') {
+    steps {
+        // Archive all required files for deployment  
+        dir('C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP') {
+            // Zip the required files into the archive
+            script {
+                def zipFileName = "SCERS-RAP-archive_${env.BUILD_NUMBER}.zip"
+                bat "powershell Compress-Archive -Path **/*.exe,**/*.dll,**/*.json,**/*.xml,**/SCERS_RAP*,**/*.html -DestinationPath ${zipFileName}"
+            }
+            archiveArtifacts artifacts: "SCERS-RAP-archive_${env.BUILD_NUMBER}.zip", fingerprint: true
+        }
+    }  
+} 
+
+
+        stage('Deploy') {
+            steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'aws-credentials', 
+                        usernameVariable: 'AWS_ACCESS_KEY_ID', 
+                        passwordVariable: 'AWS_SECRET_ACCESS_KEY'
+                    )
+                ]) {
+                    script {
+                        echo "Deploying artifacts to S3 bucket..."
+
+                        // Generate a unique version identifier (e.g., timestamp or build number)
+                        def timestamp = new Date().format("yyyy-MM-dd-HH-mm")
+                        def versionFolder = "${AWS_TARGET_FOLDER}/${timestamp}"
+
+                        // Export AWS credentials and upload the zip file to versioned folder in S3
+                        bat """
+                            set AWS_ACCESS_KEY_ID=%AWS_ACCESS_KEY_ID%
+                            set AWS_SECRET_ACCESS_KEY=%AWS_SECRET_ACCESS_KEY%
+                            aws s3 cp C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP/SCERS-RAP-archive_${env.BUILD_NUMBER}.zip s3://${AWS_BUCKET}/${versionFolder}/${s3FileName}
+                        """
+
+                        echo "Deployment to S3 bucket completed. Version: ${timestamp}"
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                // Ensure s3Bucket and s3TargetFolder are defined
+                def s3Bucket = env.AWS_BUCKET
+                def s3TargetFolder = env.AWS_TARGET_FOLDER
+                def timestamp = new Date().format("yyyy-MM-dd-HH-mm")
+
+                // Construct the S3 URL for the deployed zip file
+                def s3Url = "https://${s3Bucket}.s3.${s3Region}.amazonaws.com/${s3TargetFolder}/${timestamp}/${s3FileName}"
+
+                // Log Slack notifications
+                echo 'Sending Slack Notifications...'
+
+                // Send Slack message
+                slackSend(
+                    channel: '#splicescers',
+                    color: COLOR_MAP[currentBuild.currentResult],
+                    message: """
+                    *${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} 
+                    More info at: ${env.BUILD_URL}
+                    Artifacts available at: <${s3Url}|S3 Artifacts>
+                    """
+                )
+            }
+        }
+    }
+}
