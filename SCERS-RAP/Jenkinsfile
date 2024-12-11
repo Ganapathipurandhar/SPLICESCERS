@@ -5,7 +5,9 @@ def COLOR_MAP = [
 pipeline {
     agent any
 
-    
+    tools {
+        msbuild 'MSBUILD2022'
+    }
 
     environment {
         DOTNET_ROOT = 'C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP/MSBuild/Current/Bin' // Adjust if using different Visual Studio version
