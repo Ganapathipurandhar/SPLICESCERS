@@ -6,7 +6,7 @@ pipeline {
     agent any
 
     tools {
-        msbuild 'MSBUILD'
+        msbuild 'MSBUILD2022'
     }
 
     environment {
