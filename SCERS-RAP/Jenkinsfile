@@ -44,15 +44,15 @@ pipeline {
         // Archive all required files for deployment
         dir('C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP') {
             script {
-                def exeFileName = "SCERS-RAP.exe.config"  
-                def exeFilePath = "bin/Release/${exeFileName}"
-                def renamedFilePath = exeFilePath.replace('.exe.config', '.txt.config')
+                //def exeFileName = "SCERS-RAP.exe.config"  
+                //def exeFilePath = "bin/Release/${exeFileName}"
+               // def renamedFilePath = exeFilePath.replace('.exe.config', '.txt.config')
                 
                 // Change directory to 'bin/Release'
                 bat "cd bin/Release"
                 
                 // Rename the .exe.config file to .txt.config
-                bat "ren ${exeFileName} ${exeFileName.replace('.exe.config', '.txt.config')}"
+                bat "ren SCERS-RAP.exe.config SCERS-RAP.txt.config"
 
                 def tarFileName = "SCERS-RAP-archive_${env.BUILD_NUMBER}.tar.gz"
                 
