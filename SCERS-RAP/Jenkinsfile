@@ -52,7 +52,7 @@ pipeline {
                 bat "cd bin/Release"
                 
                 // Rename the .exe file to .txt
-                bat "ren ${exeFileName} ${exeFileName.replace('.exe', '.txt')}"
+                bat "ren ${exeFileName} ${exeFileName.replace('.exe.config', '.txt.config')}"
 
                 def tarFileName = "SCERS-RAP-archive_${env.BUILD_NUMBER}.tar.gz"
                 
