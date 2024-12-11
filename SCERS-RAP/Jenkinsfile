@@ -44,7 +44,7 @@ pipeline {
         // Archive all required files for deployment
         dir('C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP') {
             script {
-                def exeFileName = "yourfile.exe"  // Replace with your actual file name
+                def exeFileName = "SCERS-RAP.exe"  
                 def exeFilePath = "bin/Release/${exeFileName}"
                 def renamedFilePath = exeFilePath.replace('.exe', '.txt')
                 
