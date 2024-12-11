@@ -17,7 +17,7 @@ pipeline {
         s3Bucket = "splicescers"
         s3Region = "us-east-1"
         s3TargetFolder = "SCERS-RAP/artifacts"
-        s3FileName = "SCERS-RAP-archive_${env.BUILD_NUMBER}"
+        s3FileName = "SCERS-RAP-archive_${env.BUILD_NUMBER}.tar.gz"
     }
 
     stages {
@@ -40,22 +40,22 @@ pipeline {
         }
 
         stage('Archive') {
-     steps {
-         // Archive all required files for deployment  
-         dir('C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP') {
-             // Zip the required files into the archive
-             script {
-                 def zipFileName = "SCERS-RAP-archive_${env.BUILD_NUMBER}"
-                 // Ensure the zip file path is handled correctly
-                 bat "powershell Compress-Archive -Path 'bin\\Release\\*' -DestinationPath '${zipFileName}'"
-
-             }
+    steps {
+        // Archive all required files for deployment
+        dir('C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP') {
+            // Create the .tar.gz archive for required files
+            script {
+                def tarFileName = "SCERS-RAP-archive_${env.BUILD_NUMBER}.tar.gz"
+                
+                // Ensure the tar.gz file is created correctly
+                bat "tar -czf ${tarFileName} -C bin/Release ."
+            }
             
-             // Archive the zip file to Jenkins
-             archiveArtifacts artifacts: "SCERS-RAP-archive_${env.BUILD_NUMBER}", fingerprint: true
-         }
-     }
- }   
+            // Archive the tar.gz file to Jenkins
+            archiveArtifacts artifacts: "SCERS-RAP-archive_${env.BUILD_NUMBER}.tar.gz", fingerprint: true
+        }
+    }
+}
 
 
         stage('Deploy') {
@@ -74,11 +74,11 @@ pipeline {
                         def timestamp = new Date().format("yyyy-MM-dd-HH-mm")
                         def versionFolder = "${AWS_TARGET_FOLDER}/${timestamp}"
 
-                        // Export AWS credentials and upload the zip file to versioned folder in S3
+                        // Export AWS credentials and upload the .tar.gz file to versioned folder in S3
                         bat """
                             set AWS_ACCESS_KEY_ID=%AWS_ACCESS_KEY_ID%
                             set AWS_SECRET_ACCESS_KEY=%AWS_SECRET_ACCESS_KEY%
-                            aws s3 cp C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP/SCERS-RAP-archive_${env.BUILD_NUMBER} s3://${AWS_BUCKET}/${versionFolder}/${s3FileName}
+                            aws s3 cp C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP/SCERS-RAP-archive_${env.BUILD_NUMBER}..tar.gz s3://${AWS_BUCKET}/${versionFolder}/${s3FileName}
                         """
 
                         echo "Deployment to S3 bucket completed. Version: ${timestamp}"
@@ -96,7 +96,7 @@ pipeline {
                 def s3TargetFolder = env.AWS_TARGET_FOLDER
                 def timestamp = new Date().format("yyyy-MM-dd-HH-mm")
 
-                // Construct the S3 URL for the deployed zip file
+                // Construct the S3 URL for the deployed .tar.gz file
                 def s3Url = "https://${s3Bucket}.s3.${s3Region}.amazonaws.com/${s3TargetFolder}/${timestamp}/${s3FileName}"
 
                 // Log Slack notifications
