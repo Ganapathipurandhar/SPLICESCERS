@@ -17,7 +17,7 @@ pipeline {
         s3Bucket = "splicescers"
         s3Region = "us-east-1"
         s3TargetFolder = "SCERS-RAP/artifacts"
-        s3FileName = "SCERS-RAP-archive_${env.BUILD_NUMBER}.zip"
+        s3FileName = "SCERS-RAP-archive_${env.BUILD_NUMBER}"
     }
 
     stages {
@@ -45,14 +45,14 @@ pipeline {
          dir('C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP') {
              // Zip the required files into the archive
              script {
-                 def zipFileName = "SCERS-RAP-archive_${env.BUILD_NUMBER}.zip"
+                 def zipFileName = "SCERS-RAP-archive_${env.BUILD_NUMBER}"
                  // Ensure the zip file path is handled correctly
                  bat "powershell Compress-Archive -Path 'bin\\Release\\*' -DestinationPath '${zipFileName}'"
 
              }
             
              // Archive the zip file to Jenkins
-             archiveArtifacts artifacts: "SCERS-RAP-archive_${env.BUILD_NUMBER}.zip", fingerprint: true
+             archiveArtifacts artifacts: "SCERS-RAP-archive_${env.BUILD_NUMBER}", fingerprint: true
          }
      }
  }   
@@ -78,7 +78,7 @@ pipeline {
                         bat """
                             set AWS_ACCESS_KEY_ID=%AWS_ACCESS_KEY_ID%
                             set AWS_SECRET_ACCESS_KEY=%AWS_SECRET_ACCESS_KEY%
-                            aws s3 cp C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP/SCERS-RAP-archive_${env.BUILD_NUMBER}.zip s3://${AWS_BUCKET}/${versionFolder}/${s3FileName}
+                            aws s3 cp C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP/SCERS-RAP-archive_${env.BUILD_NUMBER} s3://${AWS_BUCKET}/${versionFolder}/${s3FileName}
                         """
 
                         echo "Deployment to S3 bucket completed. Version: ${timestamp}"
