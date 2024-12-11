@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SCERS-RAP")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("This is a sample C# project for demonstration purposes.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("MyCompany")]
 [assembly: AssemblyProduct("SCERS-RAP")]
 [assembly: AssemblyCopyright("Copyright ©  2024")]
 [assembly: AssemblyTrademark("")]
