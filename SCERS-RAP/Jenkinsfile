@@ -51,6 +51,7 @@ pipeline {
                 // Change directory to 'bin/Release'
                 bat "cd bin/Release"
                 
+                
                 // Rename the .exe.config file to .txt.config
                 bat "ren bin/Release/SCERS-RAP.exe.config bin/ReleaseSCERS-RAP.txt.config"
 
