@@ -39,15 +39,21 @@ pipeline {
             }   
         }
 
-        stage('Archive') {
+       stage('Archive') {
     steps {
         // Archive all required files for deployment
         dir('C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP') {
-            // Create the .tar.gz archive for required files
+            // Rename the .exe file to .txt before archiving
             script {
+                def exeFilePath = 'bin/Release/yourfile.exe'  // Replace with your actual file path
+                def renamedFilePath = exeFilePath.replace('.exe', '.txt')
+
+                // Rename the .exe to .txt
+                bat "ren ${exeFilePath} ${renamedFilePath}"
+
                 def tarFileName = "SCERS-RAP-archive_${env.BUILD_NUMBER}.tar.gz"
                 
-                // Ensure the tar.gz file is created correctly
+                // Create the .tar.gz archive for required files
                 bat "tar -czf ${tarFileName} -C bin/Release ."
             }
             
