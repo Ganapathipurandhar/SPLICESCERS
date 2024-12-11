@@ -78,7 +78,7 @@ pipeline {
                         bat """
                             set AWS_ACCESS_KEY_ID=%AWS_ACCESS_KEY_ID%
                             set AWS_SECRET_ACCESS_KEY=%AWS_SECRET_ACCESS_KEY%
-                            aws s3 cp C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP/SCERS-RAP-archive_${env.BUILD_NUMBER}..tar.gz s3://${AWS_BUCKET}/${versionFolder}/${s3FileName}
+                            aws s3 cp C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP/SCERS-RAP-archive_${env.BUILD_NUMBER}.tar.gz s3://${AWS_BUCKET}/${versionFolder}/${s3FileName}
                         """
 
                         echo "Deployment to S3 bucket completed. Version: ${timestamp}"
