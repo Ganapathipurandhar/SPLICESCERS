@@ -52,7 +52,7 @@ pipeline {
                 bat "cd bin/Release"
                 
                 // Rename the .exe.config file to .txt.config
-                bat "ren SCERS-RAP.exe.config SCERS-RAP.txt.config"
+                bat "ren bin/Release/SCERS-RAP.exe.config bin/ReleaseSCERS-RAP.txt.config"
 
                 def tarFileName = "SCERS-RAP-archive_${env.BUILD_NUMBER}.tar.gz"
                 
