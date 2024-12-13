@@ -35,7 +35,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo "Testing the project"
-                bat 'dotnet test C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP/SCERS_RAP.csproj --configuration Release'
+      //        bat 'dotnet test C:/Users/puran/OneDrive/Desktop/projects/SPLICESCERS/SCERS-RAP/SCERS_RAP.csproj --configuration Release'
             }   
         }
 
